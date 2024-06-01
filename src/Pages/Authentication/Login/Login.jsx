@@ -1,48 +1,91 @@
-import React from 'react';
-import {Link} from 'react-router-dom'
-import userCurrentUser from '../../../Utils/Hooks/userCurrentUser';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
+import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
+import Swal from 'sweetalert2';
+import { FaEyeSlash } from 'react-icons/fa6';
+import { VscEye } from 'react-icons/vsc';
+import Button from '../../../Shared/Button/Button';
+
 
 const Login = () => {
-    const {loginWithGoogle} = userCurrentUser();
-
+    const { loginWithGoogle, loginWithPassword } = useCurrentUser();
+    const [eye, setEye] = useState(true);
+    const [buttonLoading, setButtonLoading] = useState(false);
     // LOGIN WITH GOOGLE
-    const handelGoogleLogin = ()=>{
+    const handelGoogleLogin = () => {
         loginWithGoogle()
-        .then(res=>{
-            alert("hello maruf")
-        })
+            .then(res => {
+                alert("hello maruf")
+            })
     }
 
 
+    // LOGIN WITH EMAIL AND PASSWORD
+    const handelPasswordLogin = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        loginWithPassword(email, password)
+            .then(res => {
+                
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: `${"welcome Back " + res?.user?.displayName}`,
+                    text: "You are successfully logedIn",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                setButtonLoading(false);
+            })
+            .catch(err => {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Opps!! Something went wrong!",
+                    text: `${err.message}`,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            })
+    }
     return (
 
-        <div className="hero min-h-screen bg-[url(/loginPageBg.png)]">
-
-            <div className="card  w-full max-w-lg py-8 shadow-2xl bg-white bg-opacity-15">
-                <h1 className='text-5xl text-center mb-4'>Welcome Back!!</h1>
+        <div className="hero min-h-screen bg-[url(/loginPageBg.png)] ">
+            <div className="card  w-full max-w-sm md:max-w-lg py-8 shadow-2xl bg-white bg-opacity-15">
                 <div className='flex justify-center items-center'>
                     <img className='size-[150px]' src="/logo.png" alt="" />
                 </div>
 
                 <div className='card-body'>
-                    <form className="">
+                    <form onSubmit={handelPasswordLogin}>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Email</span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered bg-transparent placeholder:text-gray-600" required />
+                            <input name='email' type="email" placeholder="email" className="input input-bordered bg-transparent placeholder:text-gray-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Password</span>
                             </label>
-                            <input type="password" placeholder="password" className="input input-bordered  bg-transparent placeholder:text-gray-600" required />
+                            <div className='relative'>
+                                <input name='password' type={eye ? "password" : "text"} placeholder="password" className="input input-bordered  bg-transparent placeholder:text-gray-600 w-full" required />
+                                <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                                    {
+                                        eye ? <VscEye onClick={() => setEye(!eye)} className='text-2xl text-[#5a5a5a] cursor-pointer'></VscEye> :
+                                            <FaEyeSlash onClick={() => setEye(!eye)} className='text-xl text-[#5a5a5a] cursor-pointer'></FaEyeSlash>
+                                    }
+                                </div>
+                            </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button onClick={() => setButtonLoading(true)}>
+                                <Button btnName={"Login"} style={"w-full"} spinner={buttonLoading} />
+                            </button>
                         </div>
                     </form>
                     <div className='flex items-center gap-2'>
@@ -51,9 +94,9 @@ const Login = () => {
                         <div className='w-full h-px bg-gray-500'></div>
                     </div>
                     <div className="flex items-center justify-center gap-3 sm:gap-x-5 mt-2">
-                        <button 
-                        onClick={handelGoogleLogin}
-                        className="bg-white dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-8 py-2.5">
+                        <button
+                            onClick={handelGoogleLogin}
+                            className="bg-white dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-gray-100 duration-300 transition-colors border px-8 py-2.5">
                             <svg className="w-5 h-5 sm:h-6 sm:w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clipPath="url(#clip0_3033_94454)">
                                     <path d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9494 17.5885 17.2678 16.323 18.1056V21.1039H20.19C22.4608 19.0139 23.766 15.9274 23.766 12.2764Z" fill="#4285F4" />

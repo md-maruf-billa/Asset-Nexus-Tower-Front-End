@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { userInfoContext } from '../../Pages/Firebase/UserAuth';
 
-const userCurrentUser = () => {
+const useCurrentUser = () => {
     const userInfo = useContext(userInfoContext);
     return userInfo;
 };
 
-export default userCurrentUser;
+export default useCurrentUser;

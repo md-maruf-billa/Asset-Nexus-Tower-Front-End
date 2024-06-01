@@ -1,12 +1,37 @@
-import React from 'react';
-import { NavLink , Link} from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { NavLink, Link } from 'react-router-dom'
+import useCurrentUser from '../../Utils/Hooks/userCurrentUser';
+import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query'
+import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
 const Nav = () => {
+    const { currentUser, logOut, loading } = useCurrentUser();
+    const axiosGlobal = userAxiosGlobal()
 
+    // HANDEL LOGOUT
+    const handelLogOut = () => {
+        logOut()
+            .then(res => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "I hope come Back Again!!",
+                    text: "You are successfully log Out.",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+    }
 
-
-
-
-
+    // GET USER TYPE INFO FROM DATABASE
+   const {data:userInfo} = useQuery({
+    queryKey:["current user role"],
+    queryFn: async ()=>{
+        const result = await axiosGlobal(`/user-info/${currentUser.email}`);
+        return result.data;
+    }
+   })
+ 
     // COMMON NAV LINK
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -37,7 +62,27 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/login" className="btn">Login</Link>
+                    {!currentUser ?
+                        <Link to="/login" className="btn">Login</Link> :
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img alt="Tailwind CSS Navbar component" src={currentUser.photoURL || "https://icon-library.com/images/generic-user-icon/generic-user-icon-9.jpg"} />
+                                </div>
+                            </div>
+                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li>
+                                    <a className="justify-between">
+                                        User Type : {userInfo?.userType }
+                                        <span className="badge">New</span>
+                                    </a>
+                                </li>
+                                <li><a>Settings</a></li>
+                                <li onClick={handelLogOut}><a>Logout</a></li>
+                            </ul>
+                        </div>
+
+                    }
                 </div>
             </div>
         </div>
@@ -45,3 +90,5 @@ const Nav = () => {
 };
 
 export default Nav;
+
+

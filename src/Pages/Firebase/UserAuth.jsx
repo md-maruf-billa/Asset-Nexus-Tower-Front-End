@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {GoogleAuthProvider, onAuthStateChanged, signInWithPopup} from 'firebase/auth'
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 import auth from './firebase.config';
+import userAxiosGlobal from './../../Utils/Hooks/userAxiosGlobal';
 
 
 
@@ -15,37 +16,69 @@ const googleProvider = new GoogleAuthProvider();
 
 
 
-const UserAuth = ({children}) => {
-
+const UserAuth = ({ children }) => {
+    // LOADED API
+    const axiosGlobal = userAxiosGlobal();
 
     // NECESSARY STATE
-    const [loading,  setLoading] = useState(true);
-    const [currentUser, setCurrentUser] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState([]);
 
     //LOGIN WITH GOOGLE ACCOUNT
-    const loginWithGoogle = ()=>{
+    const loginWithGoogle = () => {
         setLoading(true);
-        return signInWithPopup(auth,googleProvider);
+        return signInWithPopup(auth, googleProvider);
+    }
+
+
+    // CREATE WITH EMAIL AND PASSWORD
+    const createAccountWithPassword = (email, password) => {
+        setLoading(true);
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+    // LOGIN WITH EMAIL AND PASSWORD
+    const loginWithPassword = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    // LOG OUT USER
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
     }
 
 
 
-
-
-
     // OBSERVER STATE 
-    useEffect(()=>{
-        onAuthStateChanged(auth, user=>{
-            if(user){
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const data = { email: user.email }
                 setCurrentUser(user);
+                axiosGlobal.post("/verify-user", data)
+                    .then(data => {
+                        localStorage.setItem("access-token", data?.data?.token);
+                        setLoading(false);
+
+                    })
             }
-            setLoading(false);
+            else {
+                setCurrentUser([])
+                setLoading(false)
+            }
+
         })
-    },[loading])
+    }, [loading])
 
     const userInfo = {
         currentUser,
-        loginWithGoogle
+        loginWithGoogle,
+        createAccountWithPassword,
+        loginWithPassword,
+        logOut,
+        loading
+
     }
     return (
         <userInfoContext.Provider value={userInfo}>
