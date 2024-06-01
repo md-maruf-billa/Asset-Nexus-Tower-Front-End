@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import useCurrentUser from '../../Utils/Hooks/userCurrentUser';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query'
 import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
 const Nav = () => {
     const { currentUser, logOut, loading } = useCurrentUser();
-    const axiosGlobal = userAxiosGlobal()
+    const axiosGlobal = userAxiosGlobal();
+    const navigate = useNavigate();
 
     // HANDEL LOGOUT
     const handelLogOut = () => {
@@ -20,6 +21,7 @@ const Nav = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate("/")
             })
     }
 

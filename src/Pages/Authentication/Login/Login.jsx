@@ -15,7 +15,14 @@ const Login = () => {
     const handelGoogleLogin = () => {
         loginWithGoogle()
             .then(res => {
-                alert("hello maruf")
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: `${"welcome " + res?.user?.displayName}`,
+                    text: `${"You are successfully logedIn as a Guest"}`,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
             })
     }
 
@@ -27,7 +34,7 @@ const Login = () => {
         const password = event.target.password.value;
         loginWithPassword(email, password)
             .then(res => {
-                
+
                 Swal.fire({
                     position: "center",
                     icon: "success",
