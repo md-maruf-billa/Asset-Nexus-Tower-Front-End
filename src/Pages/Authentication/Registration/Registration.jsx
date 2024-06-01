@@ -19,27 +19,46 @@ const Registration = () => {
     const [switchTab, setSwitchTab] = useState("Employee");
     const [birthDay, onChange] = useState(new Date());
     const [photoURL, setPhotURL] = useState("");
+    const [companyLogo, setCompanyLogo] = useState("")
     const [spinner, setSpinner] = useState(false);
     const [passErr, setPassErr] = useState('');
     const [strongPass, setStrongPass] = useState("");
     const [successPass, setSuccessPass] = useState("")
     const [eye, setEye] = useState(true);
+    const [userInfo, setUserInfo] = useState();
 
 
-    // UPLOAD PHOT IMAGE BB
-    const handelUploadPhoto = (e) => {
+    // UPLOAD PHOTO IMAGE BB
+    const uploadProfileImage = (e) => {
         setSpinner(true);
         const image = e.target.files[0];
         const imageFile = new FormData();
         imageFile.append("image", image);
 
-        // UPLOAD API
+        // UPLOAD 
         axiosGlobal.post(`${import.meta.env.VITE_IMAGEBBURL}?key=${import.meta.env.VITE_IMAGEBB_API_KEY}`, imageFile)
             .then(data => {
                 setPhotURL(data?.data?.data?.display_url)
                 setSpinner(false);
             })
     }
+
+
+    const uploadCompanyLogo = (e) => {
+        setSpinner(true);
+        const image = e.target.files[0];
+        const imageFile = new FormData();
+        imageFile.append("image", image);
+
+        // UPLOAD 
+        axiosGlobal.post(`${import.meta.env.VITE_IMAGEBBURL}?key=${import.meta.env.VITE_IMAGEBB_API_KEY}`, imageFile)
+            .then(data => {
+                setCompanyLogo(data?.data?.data?.display_url)
+                setSpinner(false);
+            })
+
+    }
+
 
     // HANDEL REGISTRATION AND SAVE DATA IN DATABASE
 
@@ -50,13 +69,14 @@ const Registration = () => {
         // GET ALL DATA FORM FORM
         const formData = event.target;
         const name = formData.name.value;
-        const companyName = formData.companyName?.value || "";
+        const companyName = formData.companyName?.value || null;
         const email = formData.email.value;
         const profileImage = photoURL;
-        const dateOfBirth = birthDay;
+        const companyProfileImage = companyLogo || null;
+        const dateOfBirth = birthDay.toLocaleDateString();
         const userType = switchTab;
 
-        const userAllInfo = { name, companyName, email, profileImage, dateOfBirth, userType }
+        const userAllInformation = { name, email, profileImage, dateOfBirth, userType, companyName, companyProfileImage };
 
         // REGISTER USER
         createAccountWithPassword(email, strongPass)
@@ -65,7 +85,7 @@ const Registration = () => {
                     displayName: name,
                     photoURL: photoURL
                 }).then(res => {
-                    axiosGlobal.post("/user-info",userAllInfo)
+                    axiosGlobal.post("/user-info",userAllInformation)
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -130,11 +150,11 @@ const Registration = () => {
                     <div className="card shrink-0 w-full max-w-sm lg:max-w-lg shadow-2xl bg-base-100 bg-opacity-15">
 
 
-                        <form onSubmit={handelPasswordBasedRegistration} className="card-body">
+                        <form id='form' onSubmit={handelPasswordBasedRegistration} className="card-body">
                             <h1 className="text-5xl text-center font-bold mb-5">Welcome to ANT</h1>
                             <div role="tablist" className="tabs tabs-boxed">
                                 <a role="tab" onClick={() => setSwitchTab("Employee")} className={`tab ${switchTab == "Employee" && 'tab-active'}`}>Join as Employee</a>
-                                <a role="tab" onClick={() => setSwitchTab("HR")} className={`tab ${switchTab == "HR" && 'tab-active'}`}>Join as HR</a>
+                                <a role="tab" onClick={() => setSwitchTab("HR Manager")} className={`tab ${switchTab == "HR Manager" && 'tab-active'}`}>Join as HR</a>
 
                             </div>
 
@@ -148,7 +168,7 @@ const Registration = () => {
                                 </label>
                             </div>
                             {
-                                switchTab == "HR" && <div className="form-control">
+                                switchTab == "HR Manager" && <div className="form-control">
                                     <label className="label">
                                         <span className="label-text font-bold">Company Name</span>
                                     </label>
@@ -194,22 +214,36 @@ const Registration = () => {
 
 
 
-                            <div className="flex items-center gap-10">
-                                <div>
-                                    <label className='label'>
-                                        <span className="label-text font-bold">Date of Birth</span>
-                                    </label>
-                                    <DatePicker onChange={onChange} value={birthDay} />
-                                </div>
+                            <div>
+                                <label className='label w-full'>
+                                    <span className="label-text font-bold">Date of Birth</span>
+                                </label>
+                                <DatePicker className={"w-full"} onChange={onChange} value={birthDay} />
+                            </div>
+                            <div className="flex items-center justify-between gap-10">
 
-                                <div>
-                                    <label className="label">
-                                        <span className="label-text font-bold">{switchTab ? "Profile Photo" : "Company Logo"}</span>
-                                    </label>
-                                    <input
-                                        onChange={(e) => handelUploadPhoto(e)}
-                                        type="file" className="file-input file-input-bordered file-input-sm w-full max-w-xs" required />
-                                </div>
+
+
+
+                                <label htmlFor="profile-image" className="flex flex-col items-center w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                    </svg>
+
+                                    <h2 className="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Profile Photo</h2>
+
+                                    <input onChange={(e) => uploadProfileImage(e)} id="profile-image" type="file" className="hidden" />
+                                </label>
+                                {switchTab == "HR Manager" && <label htmlFor="company-logo" className="flex flex-col items-center w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-gray-500 dark:text-gray-400">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+                                    </svg>
+
+                                    <h2 className="mt-1 font-medium tracking-wide text-gray-700 dark:text-gray-200">Company Logo</h2>
+
+                                    <input onChange={(e) => uploadCompanyLogo(e)} id="company-logo" type="file" className="hidden" />
+                                </label>}
+
                             </div>
 
 

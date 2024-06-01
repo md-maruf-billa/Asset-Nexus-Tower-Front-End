@@ -15,7 +15,9 @@ const Layouts = () => {
                 loading ? <Loader /> :
                     <div>
                         <Nav />
-                        <Outlet />
+                        <div className='min-h-screen'>
+                            <Outlet />
+                        </div>
                         <Footer />
                     </div>
             }

@@ -35,9 +35,9 @@ const Nav = () => {
     // COMMON NAV LINK
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/h">Join Us</NavLink></li>
-        <li><NavLink to="/s">HELE</NavLink></li>
-        <li><NavLink to="/f">BEBE</NavLink></li>
+        <li><NavLink to="/registration">Join as Employee</NavLink></li>
+        
+        
     </>
     return (
         <div className='container mx-auto'>
@@ -62,7 +62,7 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {!currentUser ?
+                    {!currentUser.email ?
                         <Link to="/login" className="btn">Login</Link> :
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -73,11 +73,11 @@ const Nav = () => {
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                                 <li>
                                     <a className="justify-between">
-                                        User Type : {userInfo?.userType }
+                                        {userInfo?.userType }
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><a>Settings</a></li>
+                                <li><Link to="/dashboard">Dashboard</Link></li>
                                 <li onClick={handelLogOut}><a>Logout</a></li>
                             </ul>
                         </div>
