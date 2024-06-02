@@ -39,7 +39,7 @@ const Dashboard = () => {
             })
     }
     return (
-        <div className='max-w-lg bg-gray-200 p-10'>
+        <div className='max-w-lg min-h-[calc(100vh-80px)] bg-gray-200 p-10'>
             {/* ----------DASHBOARD NAVBAR----- */}
 
 
@@ -68,6 +68,7 @@ const Dashboard = () => {
             {/* ---------COMMON LINK------------------------- */}
             <>
                 <div className='divider'></div>
+                <NavLink to={"/"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Home</NavLink>
                 <NavLink to={"student-home"} end className="flex gap-2 items-center p-2 rounded-lg"><BiMessageSquareEdit /> Edit Profile</NavLink>
                 <button onClick={handelLogout} className="flex gap-2 items-center p-2 rounded-lg"><FiLogOut /> Log Out</button>
 

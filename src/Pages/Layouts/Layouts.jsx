@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Nav from '../../Common/Nav/Nav';
-import Footer from '../../Common/Footer/Footer';
 import useCurrentUser from '../../Utils/Hooks/userCurrentUser';
 import Loader from '../../Shared/Loader/Loader';
+import Nav from './../../Components/Nav/Nav';
+import Footer from './../../Components/Footer/Footer';
 
 const Layouts = () => {
     const { loading } = useCurrentUser();
