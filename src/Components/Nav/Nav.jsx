@@ -63,7 +63,7 @@ const Nav = () => {
                         {navLink}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end z-50">
                     {!currentUser.email ?
                         <Link to="/login" className="btn">Login</Link> :
                         <div className="dropdown dropdown-end">
