@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from '../../Components/Slider/Slider';
 import Pricing from '../../Components/Pricing/Pricing';
+import AboutUs from '../../Components/AboutUs/AboutUs';
 
 const Home = () => {
     return (
@@ -10,11 +11,7 @@ const Home = () => {
 
 
             {/* ABOUT SECTION */}
-            {/* 
-            TODO:
-            create later
-
-            */}
+            <AboutUs/>
 
 
 
