@@ -14,6 +14,7 @@ import { IoPersonAdd } from "react-icons/io5";
 import useAdminCheck from '../Utils/Hooks/useAdminCheck';
 import Swal from 'sweetalert2';
 import useCurrentUser from '../Utils/Hooks/userCurrentUser';
+import { FaBars } from "react-icons/fa6";
 
 const Dashboard = () => {
     const userRole = useAdminCheck();
@@ -39,40 +40,54 @@ const Dashboard = () => {
             })
     }
     return (
-        <div className='max-w-lg min-h-[calc(100vh-80px)] bg-gray-200 p-10'>
+        <div className='max-w-lg min-h-[calc(100vh-80px)] bg-gray-200 p-10 z-50'>
             {/* ----------DASHBOARD NAVBAR----- */}
 
+            <div className="drawer lg:drawer-open">
+                <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+                <div className="drawer-content flex flex-col items-center justify-center">
+                    {/* Page content here */}
+                    <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden"><FaBars/></label>
 
-            {
-                userRole === 'HR Manager' ?
-                    <>
-                        <NavLink to={"/dashboard"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> HR Dashboard</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Custom Requests List</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
+                </div>
+                <div className="drawer-side">
+                    <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+                    <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                        {/* Sidebar content here */}
+                        {
+                            userRole === 'HR Manager' ?
+                                <>
+                                    <NavLink to={"/dashboard"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> HR Dashboard</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
+                                    <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Custom Requests List</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
 
-                    </>
-                    :
+                                </>
+                                :
 
-                    <>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
-                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>
+                                <>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
+                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>
 
-                    </>
-            }
-            {/* ---------COMMON LINK------------------------- */}
-            <>
-                <div className='divider'></div>
-                <NavLink to={"/"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Home</NavLink>
-                <NavLink to={"student-home"} end className="flex gap-2 items-center p-2 rounded-lg"><BiMessageSquareEdit /> Edit Profile</NavLink>
-                <button onClick={handelLogout} className="flex gap-2 items-center p-2 rounded-lg"><FiLogOut /> Log Out</button>
+                                </>
+                        }
+                        {/* ---------COMMON LINK------------------------- */}
+                        <>
+                            <div className='divider'></div>
+                            <NavLink to={"/"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Home</NavLink>
+                            <NavLink to={"student-home"} end className="flex gap-2 items-center p-2 rounded-lg"><BiMessageSquareEdit /> Edit Profile</NavLink>
+                            <button onClick={handelLogout} className="flex gap-2 items-center p-2 rounded-lg"><FiLogOut /> Log Out</button>
 
-            </>
+                        </>
+                    </ul>
+
+                </div>
+            </div>
         </div>
     );
 };

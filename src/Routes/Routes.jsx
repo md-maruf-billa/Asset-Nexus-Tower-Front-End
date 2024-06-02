@@ -8,6 +8,7 @@ import Registration from '../Pages/Authentication/Registration/Registration';
 import DashboardLayout from '../Dashboard/DashboardLayout/DashboardLayout';
 import AdminHome from '../Dashboard/Admin/AdminHome/AdminHome';
 import HrHome from '../Dashboard/Hr-Manager/HrHome/HrHome';
+import AddAsset from '../Dashboard/Hr-Manager/AddAsset/AddAsset';
 
 const Routes = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const Routes = createBrowserRouter([
             {
                 path:"/dashboard",
                 element:<HrHome/>
+            },
+            {
+                path:"add-asset",
+                element:<AddAsset/>
             }
         ]
     }

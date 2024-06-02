@@ -11,7 +11,7 @@ const DashboardLayout = () => {
     return (
         <> 
             <DashboardNav/>        
-            <div className='flex gap-20'>
+            <div className='flex md:gap-20'>
 
                 <Dashboard />
                 <Outlet />

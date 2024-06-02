@@ -10,12 +10,12 @@ const AboutUs = () => {
             </div>
 
 
-            <div className='flex gap-10 mt-16'>
+            <div className='flex flex-col md:flex-row gap-5 lg:gap-10 mt-16'>
                 {/* CONTENT SECTION */}
-                <div className='w-1/2 shadow-sm p-6 rounded-md'>
+                <div className='md:w-1/2 shadow-sm p-6 rounded-md'>
                     <div>
                         <h4 className='text-[#ff6916] uppercase tracking-[4px]'>How we Started</h4>
-                        <h2 className='text-6xl my-4 font-bold'>Our Dream is Providing Best Service wih Honestly</h2>
+                        <h2 className='text-4xl lg:text-6xl my-4 font-bold'>Our Dream is Providing Best Service wih Honestly</h2>
 
                         <span className='space-y-2 text-justify'>
                             <p className='text-justify'>
@@ -41,7 +41,7 @@ const AboutUs = () => {
                 </div>
 
                 {/* IMAGE SECTION */}
-                <div className='w-1/2 flex flex-col items-center shadow-sm p-6'>
+                <div className='md:w-1/2 flex flex-col items-center shadow-sm p-6'>
                     <div className='w-full'>
                         <img className='rounded-lg w-full' src={team} alt="" />
                     </div>

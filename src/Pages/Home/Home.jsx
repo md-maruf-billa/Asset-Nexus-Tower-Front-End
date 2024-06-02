@@ -7,16 +7,18 @@ const Home = () => {
     return (
         <div>
             {/* BANNER */}
-            <Slider/>
+            <Slider />
 
 
-            {/* ABOUT SECTION */}
-            <AboutUs/>
+            <div className='px-2'>
+                {/* ABOUT SECTION */}
+                <AboutUs />
 
 
 
-            {/* PACKAGE SECTION */}
-            <Pricing/>
+                {/* PACKAGE SECTION */}
+                <Pricing />
+            </div>
         </div>
     );
 };

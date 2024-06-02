@@ -9,7 +9,7 @@ const Pricing = () => {
                     <h2 className="text-4xl font-bold lg:text-5xl">Choose Your best Plan</h2>
                 </div>
                 <div className="flex flex-wrap items-center  -mx-4">
-                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 h-[450px]">
+                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 ">
                         <div className="flex flex-grow flex-col p-6 space-y-6 border rounded shadow sm:p-8 dark:bg-gray-50">
                             <div className="space-y-2">
                                 <h4 className="text-2xl font-bold">Stater</h4>
@@ -41,7 +41,7 @@ const Pricing = () => {
                             <button type="button" className="inline-block px-5 py-3 font-semibold tracking-wider text-center rounded dark:bg-violet-600 dark:text-gray-50">Get Started</button>
                         </div>
                     </div>
-                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 h-[550px]">
+                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 lg:h-[550px]">
                         <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 bg-violet-600 text-gray-50">
                             <div className="space-y-2">
                                 <h4 className="text-2xl font-bold">Pro</h4>
@@ -73,7 +73,7 @@ const Pricing = () => {
                             <a rel="noopener noreferrer" href="#" className="inline-block w-full px-5 py-3 font-bold tracking-wider text-center rounded dark:bg-gray-100 dark:text-violet-600">Get Started</a>
                         </div>
                     </div>
-                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 h-[450px]" >
+                    <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 " >
                         <div className="flex border flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 dark:bg-gray-50">
                             <div className="space-y-2">
                                 <h4 className="text-2xl font-bold">Basic</h4>
