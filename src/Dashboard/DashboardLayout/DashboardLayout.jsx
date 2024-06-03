@@ -6,14 +6,17 @@ import Loader from '../../Shared/Loader/Loader';
 import DashboardNav from '../../Components/DahsboardNav/DashboardNav';
 
 const DashboardLayout = () => {
-    const {loading} = useCurrentUser();
-    if(loading) return <Loader/>
+    const { loading } = useCurrentUser();
+    if (loading) return <Loader />
     return (
-        <> 
-            <DashboardNav/>        
-            <div className='flex md:gap-20'>
+        <>
+            <DashboardNav />
+            <div className='flex flex-col md:flex-row md:gap-20'>
 
-                <Dashboard />
+                <div className='flex my-5 ml-2'>
+                    <Dashboard />
+                </div>
+
                 <Outlet />
             </div>
         </>

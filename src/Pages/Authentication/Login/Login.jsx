@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 import Swal from 'sweetalert2';
 import { FaEyeSlash } from 'react-icons/fa6';
@@ -8,6 +8,7 @@ import Button from '../../../Shared/Button/Button';
 
 
 const Login = () => {
+    const navigate = useNavigate();
     const { loginWithGoogle, loginWithPassword } = useCurrentUser();
     const [eye, setEye] = useState(true);
     const [buttonLoading, setButtonLoading] = useState(false);
@@ -23,6 +24,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 3000
                 });
+                navigate("/")
             })
     }
 
@@ -44,6 +46,7 @@ const Login = () => {
                     timer: 2000
                 });
                 setButtonLoading(false);
+                navigate("/")
             })
             .catch(err => {
                 Swal.fire({

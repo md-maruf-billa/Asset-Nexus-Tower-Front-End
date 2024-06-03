@@ -40,7 +40,7 @@ const Dashboard = () => {
             })
     }
     return (
-        <div className='max-w-lg min-h-[calc(100vh-80px)] bg-gray-200 p-10 z-50'>
+        <div className='lg:max-w-lg  p-4 z-50'>
             {/* ----------DASHBOARD NAVBAR----- */}
 
             <div className="drawer lg:drawer-open">
@@ -69,7 +69,7 @@ const Dashboard = () => {
                                 :
 
                                 <>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
+                                    <NavLink to={"/dashboard/employee-home"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
                                     <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
                                     <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
                                     <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>

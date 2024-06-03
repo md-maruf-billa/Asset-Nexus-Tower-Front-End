@@ -4,8 +4,11 @@ import useCurrentUser from '../../Utils/Hooks/userCurrentUser';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query'
 import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
+import useAdminCheck from '../../Utils/Hooks/useAdminCheck';
+
 const Nav = () => {
-    const { currentUser, logOut, loading } = useCurrentUser();
+    const userRole = useAdminCheck();
+    const { currentUser, logOut } = useCurrentUser();
     const axiosGlobal = userAxiosGlobal();
     const navigate = useNavigate();
 
@@ -26,20 +29,22 @@ const Nav = () => {
     }
 
     // GET USER TYPE INFO FROM DATABASE
-   const {data:userInfo} = useQuery({
-    queryKey:["current user role"],
-    queryFn: async ()=>{
-        const result = await axiosGlobal(`/user-info/${currentUser.email}`);
-        return result.data;
-    }
-   })
- 
+    const { data: userInfo } = useQuery({
+        queryKey: ["current user role"],
+        queryFn: async () => {
+            const result = await axiosGlobal(`/user-info/${currentUser.email}`);
+            return result.data;
+        }
+    })
+
     // COMMON NAV LINK
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/registration">Join as Employee</NavLink></li>
-        
-        
+        {
+            currentUser.email ? <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Go Your Dashboard</Link></li> :
+                <li><NavLink to="/registration">Join as Employee</NavLink></li>}
+
+
     </>
     return (
         <div className='container mx-auto'>
@@ -75,7 +80,7 @@ const Nav = () => {
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                                 <li>
                                     <a className="justify-between">
-                                        {userInfo?.userType }
+                                        {userInfo?.userType}
                                         <span className="badge">New</span>
                                     </a>
                                 </li>

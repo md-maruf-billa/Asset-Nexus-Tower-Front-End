@@ -9,6 +9,9 @@ import DashboardLayout from '../Dashboard/DashboardLayout/DashboardLayout';
 import AdminHome from '../Dashboard/Admin/AdminHome/AdminHome';
 import HrHome from '../Dashboard/Hr-Manager/HrHome/HrHome';
 import AddAsset from '../Dashboard/Hr-Manager/AddAsset/AddAsset';
+import CheckAdminRoutes from '../Secure/CheckAdminRutes/CheckAdminRoutes';
+import EmployeeHome from '../Dashboard/Employee/EmployeeHome/EmployeeHome';
+import CheckEmployeeRoutes from '../Secure/CheckEmployeeRoutes/CheckEmployeeRoutes';
 
 const Routes = createBrowserRouter([
     {
@@ -36,13 +39,24 @@ const Routes = createBrowserRouter([
         path:"/dashboard",
         element:<DashboardLayout/>,
         children:[
+
+            // FOR HR
             {
                 path:"/dashboard",
-                element:<HrHome/>
+                element:<CheckAdminRoutes><HrHome/></CheckAdminRoutes>
             },
             {
                 path:"add-asset",
-                element:<AddAsset/>
+                element:<CheckAdminRoutes><AddAsset/></CheckAdminRoutes>
+            },
+
+
+
+            // FOR EMPLOYEE
+
+            {
+                path:"/dashboard/employee-home",
+                element:<CheckEmployeeRoutes><EmployeeHome/></CheckEmployeeRoutes>
             }
         ]
     }

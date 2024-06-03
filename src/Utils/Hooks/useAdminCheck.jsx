@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
-import useCurrentUser from "./userCurrentUser";
 import Loader from "../../Shared/Loader/Loader";
-import { useState } from "react";
 
 
 const useAdminCheck = () => {
