@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query'
 import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
 import useAdminCheck from '../../Utils/Hooks/useAdminCheck';
+import { useForm } from "react-hook-form"
+
+
 
 const Nav = () => {
     const userRole = useAdminCheck();
@@ -41,7 +44,8 @@ const Nav = () => {
     const navLink = <>
         <li><NavLink to="/">Home</NavLink></li>
         {
-            currentUser.email ? <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Go Your Dashboard</Link></li> :
+            currentUser.email ?
+                <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Go Your Dashboard</Link></li> :
                 <li><NavLink to="/registration">Join as Employee</NavLink></li>}
 
 
@@ -84,7 +88,7 @@ const Nav = () => {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li><Link to="/dashboard">Dashboard</Link></li>
+                                <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Dashboard</Link></li>
                                 <li onClick={handelLogOut}><a>Logout</a></li>
                             </ul>
                         </div>

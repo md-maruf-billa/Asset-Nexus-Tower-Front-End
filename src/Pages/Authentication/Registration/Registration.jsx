@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '../../../Shared/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
@@ -25,7 +25,7 @@ const Registration = () => {
     const [strongPass, setStrongPass] = useState("");
     const [successPass, setSuccessPass] = useState("")
     const [eye, setEye] = useState(true);
-    const [userInfo, setUserInfo] = useState();
+    const navigate = useNavigate();
 
 
     // UPLOAD PHOTO IMAGE BB
@@ -95,6 +95,7 @@ const Registration = () => {
                         timer: 3000
                     });
                 })
+                navigate("/")
             })
             .catch(err => {
                 Swal.fire({
