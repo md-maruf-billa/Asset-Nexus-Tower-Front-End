@@ -3,13 +3,15 @@ import { BiSolidEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAxiosSecure from '../../../../Utils/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-
+import Swal from 'sweetalert2';
+import Lottie from "lottie-react";
+import noDataFound from '../../../../assets/Animation/NoDataFound.json'
 
 
 const AssetList = () => {
     const axiosSecure = useAxiosSecure();
     // LOAD ALL ASSET
-    const { data: allAsset,isLoading } = useQuery({
+    const { data: allAsset, isLoading, refetch } = useQuery({
         queryKey: ["load all asset"],
         queryFn: async () => {
             const res = await axiosSecure("/all-asset");
@@ -18,7 +20,46 @@ const AssetList = () => {
 
 
     })
-    if(isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
+
+
+    // DELETE ASSET
+    const handleDelete = (id, itemName) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+
+
+
+            if (result.isConfirmed) {
+                const response = await axiosSecure.delete(`/delete-asset/${id}`)
+                if (response?.data?.deletedCount > 1) {
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: `${itemName} + "is Deleted."`,
+                        icon: "success"
+                    });
+
+                }
+                refetch();
+            }
+
+        });
+
+    }
+
+
+
+
+
+    if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
+    if(allAsset.length==0) return <div className='flex justify-center items-center w-full'><Lottie animationData={noDataFound} /></div>;
     return (
         <div>
             <div className="overflow-x-auto">
@@ -38,9 +79,9 @@ const AssetList = () => {
                     </thead>
                     <tbody>
                         {
-                            allAsset.map((asset,idx) =>
+                            allAsset.map((asset, idx) =>
                                 <tr key={asset._id}>
-                                    <th>{idx+1}</th>
+                                    <th>{idx + 1}</th>
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">
@@ -52,9 +93,9 @@ const AssetList = () => {
                                     </td>
                                     <td className='font-bold'>{asset.productName}</td>
                                     <td>
-                                        <span className={`${asset.productType == "Returnable"?"bg-yellow-100 p-2 rounded-lg":"bg-blue-100 p-2 rounded-lg"}`}>{asset.productType}</span>
-                                        </td>
-                                    <td className='font-bold'>{asset. productQuantity} Pic</td>
+                                        <span className={`${asset.productType == "Returnable" ? "bg-yellow-100 p-2 rounded-lg" : "bg-blue-100 p-2 rounded-lg"}`}>{asset.productType}</span>
+                                    </td>
+                                    <td className='font-bold'>{asset.productQuantity} Pic</td>
                                     <td>{asset.addedTime}</td>
                                     <td>
                                         <button className='p-2 border text-xl bg-green-400 hover:bg-green-600  hover:text-white rounded-lg'>
@@ -62,7 +103,9 @@ const AssetList = () => {
                                         </button>
                                     </td>
                                     <td>
-                                        <button className='p-2 border text-xl bg-red-200 text-red-700 hover:bg-red-600  hover:text-white rounded-lg'>
+                                        <button
+                                            onClick={() => handleDelete(asset._id, asset.productName)}
+                                            className='p-2 border text-xl bg-red-200 text-red-700 hover:bg-red-600  hover:text-white rounded-lg'>
                                             <RiDeleteBin6Line />
                                         </button>
 
