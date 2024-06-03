@@ -58,7 +58,7 @@ const Dashboard = () => {
                             userRole === 'HR Manager' ?
                                 <>
                                     <NavLink to={"/dashboard"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> HR Dashboard</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
+                                    <NavLink to={"asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
                                     <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
                                     <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
                                     <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Custom Requests List</NavLink>

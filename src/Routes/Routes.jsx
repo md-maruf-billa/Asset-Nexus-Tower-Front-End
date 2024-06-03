@@ -6,12 +6,13 @@ import Home from './../Pages/Home/Home';
 import Login from './../Pages/Authentication/Login/Login';
 import Registration from '../Pages/Authentication/Registration/Registration';
 import DashboardLayout from '../Dashboard/DashboardLayout/DashboardLayout';
-import AdminHome from '../Dashboard/Admin/AdminHome/AdminHome';
 import HrHome from '../Dashboard/Hr-Manager/HrHome/HrHome';
 import AddAsset from '../Dashboard/Hr-Manager/AddAsset/AddAsset';
-import CheckAdminRoutes from '../Secure/CheckAdminRutes/CheckAdminRoutes';
+import CheckAdminRoutes from '../Secure/CheckHrRutes/CheckHrRoutes';
 import EmployeeHome from '../Dashboard/Employee/EmployeeHome/EmployeeHome';
 import CheckEmployeeRoutes from '../Secure/CheckEmployeeRoutes/CheckEmployeeRoutes';
+import CheckHrRoutes from '../Secure/CheckHrRutes/CheckHrRoutes';
+import AssetList from '../Dashboard/Hr-Manager/HrHome/AssetList/AssetList';
 
 const Routes = createBrowserRouter([
     {
@@ -43,12 +44,19 @@ const Routes = createBrowserRouter([
             // FOR HR
             {
                 path:"/dashboard",
-                element:<CheckAdminRoutes><HrHome/></CheckAdminRoutes>
+                element:<CheckHrRoutes><HrHome/></CheckHrRoutes>
             },
             {
                 path:"add-asset",
-                element:<CheckAdminRoutes><AddAsset/></CheckAdminRoutes>
+                element:<CheckHrRoutes><AddAsset/></CheckHrRoutes>
             },
+            {
+                path:"asset-list",
+                element:<CheckHrRoutes><AssetList/></CheckHrRoutes>
+            }
+            
+            ,
+            
 
 
 
