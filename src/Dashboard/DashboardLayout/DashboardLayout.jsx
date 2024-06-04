@@ -11,13 +11,15 @@ const DashboardLayout = () => {
     return (
         <>
             <DashboardNav />
-            <div className='flex flex-col md:flex-row md:gap-20'>
+            <div className='flex flex-col md:flex-row md:gap-10'>
 
-                <div className='flex my-5 ml-2'>
+                <div className='flex -mt-4'>
                     <Dashboard />
                 </div>
 
-                <Outlet />
+                <div className=' w-full md:container mr-10'>
+                    <Outlet />
+                </div>
             </div>
         </>
     );

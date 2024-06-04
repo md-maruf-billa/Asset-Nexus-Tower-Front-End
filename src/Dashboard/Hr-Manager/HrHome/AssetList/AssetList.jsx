@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BiSolidEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAxiosSecure from '../../../../Utils/Hooks/useAxiosSecure';
@@ -6,10 +6,13 @@ import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import Lottie from "lottie-react";
 import noDataFound from '../../../../assets/Animation/NoDataFound.json'
+import AssetUpdateModal from '../../../DashboardShared/AssetsBarChart/AssetUpdateModal/AssetUpdateModal';
 
 
 const AssetList = () => {
     const axiosSecure = useAxiosSecure();
+    const [isOpenModal , setIsOpenModal] = useState(false); 
+    const [assetId, setAssetId] = useState("");
     // LOAD ALL ASSET
     const { data: allAsset, isLoading, refetch } = useQuery({
         queryKey: ["load all asset"],
@@ -61,7 +64,8 @@ const AssetList = () => {
     if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
     if(allAsset.length==0) return <div className='flex justify-center items-center w-full'><Lottie animationData={noDataFound} /></div>;
     return (
-        <div>
+        <div className='w-full py-10'>
+            <h3 className='text-4xl mb-4'>Your All Assets List :</h3>
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     {/* head */}
@@ -98,7 +102,9 @@ const AssetList = () => {
                                     <td className='font-bold'>{asset.productQuantity} Pic</td>
                                     <td>{asset.addedTime}</td>
                                     <td>
-                                        <button className='p-2 border text-xl bg-green-400 hover:bg-green-600  hover:text-white rounded-lg'>
+                                        <button 
+                                        onClick={()=>{ setIsOpenModal(true),setAssetId(asset._id)}}
+                                        className='p-2 border text-xl bg-green-400 hover:bg-green-600  hover:text-white rounded-lg'>
                                             <BiSolidEdit />
                                         </button>
                                     </td>
@@ -118,6 +124,13 @@ const AssetList = () => {
                     </tbody>
                 </table>
             </div>
+
+            <AssetUpdateModal 
+            isOpenModal={isOpenModal} 
+            setIsOpenModal={setIsOpenModal} 
+            assetId={assetId}
+            refetch={refetch}
+            />
         </div>
     );
 };

@@ -53,7 +53,7 @@ const AddAsset = () => {
 
 
     return (
-        <div className='flex items-center justify-center w-full'>
+        <div className='flex items-center justify-center w-full h-full'>
             <section class=" p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-4xl text-center font-semibold text-gray-700 capitalize">Add Your Assets</h2>
 
