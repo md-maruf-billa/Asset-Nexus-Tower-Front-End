@@ -1,14 +1,11 @@
 import React from 'react';
 import team from '../../assets/images/team/team.png'
+import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 const AboutUs = () => {
     return (
         <div className='container mx-auto mt-28'>
             {/* HEADING HAER */}
-            <div className="max-w-2xl mx-auto mb-16 text-center">
-                <span className="font-bold tracking-wider uppercase dark:text-violet-600">About Us</span>
-                <h2 className="text-4xl font-bold lg:text-5xl">Our growing up</h2>
-            </div>
-
+            <SectionTitle subTitle={"About Us"} heading={"Our Growing Up"}/>
 
             <div className='flex flex-col md:flex-row gap-5 lg:gap-10 mt-16'>
                 {/* CONTENT SECTION */}

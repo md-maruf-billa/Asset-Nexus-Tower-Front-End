@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from '../../Components/Slider/Slider';
 import Pricing from '../../Components/Pricing/Pricing';
 import AboutUs from '../../Components/AboutUs/AboutUs';
+import AllCompany from '../../Components/AllCompany/AllCompany';
 
 const Home = () => {
     return (
@@ -18,6 +19,9 @@ const Home = () => {
 
                 {/* PACKAGE SECTION */}
                 <Pricing />
+
+                {/* ALL COMPANY */}
+                <AllCompany/>
             </div>
         </div>
     );

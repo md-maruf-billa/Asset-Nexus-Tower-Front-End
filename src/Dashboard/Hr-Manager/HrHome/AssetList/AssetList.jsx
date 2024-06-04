@@ -7,9 +7,11 @@ import Swal from 'sweetalert2';
 import Lottie from "lottie-react";
 import noDataFound from '../../../../assets/Animation/NoDataFound.json'
 import AssetUpdateModal from '../../../DashboardShared/AssetsBarChart/AssetUpdateModal/AssetUpdateModal';
+import useCurrentUser from '../../../../Utils/Hooks/userCurrentUser';
 
 
 const AssetList = () => {
+    const {currentUser} = useCurrentUser();
     const axiosSecure = useAxiosSecure();
     const [isOpenModal , setIsOpenModal] = useState(false); 
     const [assetId, setAssetId] = useState("");
@@ -17,7 +19,7 @@ const AssetList = () => {
     const { data: allAsset, isLoading, refetch } = useQuery({
         queryKey: ["load all asset"],
         queryFn: async () => {
-            const res = await axiosSecure("/all-asset");
+            const res = await axiosSecure(`/all-asset/${currentUser?.email}`);
             return res.data;
         }
 
@@ -99,7 +101,7 @@ const AssetList = () => {
                                     <td>
                                         <span className={`${asset.productType == "Returnable" ? "bg-yellow-100 p-2 rounded-lg" : "bg-blue-100 p-2 rounded-lg"}`}>{asset.productType}</span>
                                     </td>
-                                    <td className='font-bold'>{asset.productQuantity} Pic</td>
+                                    <td className={`font-bold ${asset.productQuantity==0 ? "text-red-500" :""}`}>{asset.productQuantity>0?asset.productQuantity :"Out Of Stock"} Pic</td>
                                     <td>{asset.addedTime}</td>
                                     <td>
                                         <button 

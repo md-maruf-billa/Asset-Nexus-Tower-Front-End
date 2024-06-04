@@ -75,8 +75,9 @@ const Registration = () => {
         const companyProfileImage = companyLogo || null;
         const dateOfBirth = birthDay.toLocaleDateString();
         const userType = switchTab;
+        const stablishAt = new Date().toLocaleDateString();
 
-        const userAllInformation = { name, email, profileImage, dateOfBirth, userType, companyName, companyProfileImage };
+        const userAllInformation = { name, email, profileImage, dateOfBirth, userType, companyName, companyProfileImage,stablishAt };
 
         // REGISTER USER
         createAccountWithPassword(email, strongPass)

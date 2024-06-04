@@ -4,6 +4,7 @@ import userAxiosGlobal from '../../../Utils/Hooks/userAxiosGlobal';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 
 const AddAsset = () => {
     const { register, handleSubmit,reset } = useForm()
@@ -11,7 +12,7 @@ const AddAsset = () => {
     const axiosSecure = useAxiosSecure();
     const [buttonLoading, setButtonLoading] = useState(false);
     const [assetImage, setAssetImage] = useState("");
-
+    const {currentUser} = useCurrentUser();
 
     // UPLOADING ASSETS IMAGE
     const uploadAssetsImage = (e) => {
@@ -30,7 +31,7 @@ const AddAsset = () => {
 
     const submitAsset = (data) => {
         const addedTime = new Date().toLocaleDateString();
-        const assetInfo = { ...data, assetImage ,addedTime}
+        const assetInfo = { ...data, assetImage ,addedTime,hrEmail:currentUser?.email}
 
         // SAVE DATA INTO DATABASE
         axiosSecure.post("/add-asset", assetInfo)

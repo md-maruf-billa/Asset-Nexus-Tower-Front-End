@@ -1,13 +1,11 @@
 import React from 'react';
+import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 
 const Pricing = () => {
     return (
         <section className="py-20 dark:bg-gray-100 dark:text-gray-800">
             <div className="container px-4 mx-auto">
-                <div className="max-w-2xl mx-auto mb-16 text-center">
-                    <span className="font-bold tracking-wider uppercase dark:text-violet-600">Our Best Pricing</span>
-                    <h2 className="text-4xl font-bold lg:text-5xl">Choose Your best Plan</h2>
-                </div>
+                <SectionTitle subTitle={"Our Best Pricing"} heading={"Choose Your Best Price"}/>
                 <div className="flex flex-wrap items-center  -mx-4">
                     <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 ">
                         <div className="flex flex-grow flex-col p-6 space-y-6 border rounded shadow sm:p-8 dark:bg-gray-50">
