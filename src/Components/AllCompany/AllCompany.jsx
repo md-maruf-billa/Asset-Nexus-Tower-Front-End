@@ -12,7 +12,6 @@ const AllCompany = () => {
             return result.data;
         }
     })
-    console.log(data)
     if(isLoading) return;
     return (
         <div className='container mx-auto'>

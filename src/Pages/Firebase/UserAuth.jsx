@@ -77,7 +77,8 @@ const UserAuth = ({ children }) => {
         createAccountWithPassword,
         loginWithPassword,
         logOut,
-        loading
+        loading,
+        setLoading
 
     }
     return (

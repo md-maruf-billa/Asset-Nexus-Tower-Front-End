@@ -13,6 +13,8 @@ import EmployeeHome from '../Dashboard/Employee/EmployeeHome/EmployeeHome';
 import CheckEmployeeRoutes from '../Secure/CheckEmployeeRoutes/CheckEmployeeRoutes';
 import CheckHrRoutes from '../Secure/CheckHrRutes/CheckHrRoutes';
 import AssetList from '../Dashboard/Hr-Manager/HrHome/AssetList/AssetList';
+import PaymentPage from '../Components/PaymentPage/PaymentPage';
+import CheckValidUser from '../Secure/CheckValidUser/CheckValidUser';
 
 const Routes = createBrowserRouter([
     {
@@ -31,6 +33,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/registration",
                 element: <Registration/>
+            },
+            {
+                path:"/payment-confirm",
+                element:<CheckValidUser><PaymentPage/></CheckValidUser>
             }
         ]
     },

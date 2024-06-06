@@ -14,7 +14,7 @@ import auth from '../../Firebase/firebase.config';
 
 const Registration = () => {
     const axiosGlobal = userAxiosGlobal();
-    const { createAccountWithPassword } = useCurrentUser();
+    const { createAccountWithPassword ,setLoading} = useCurrentUser();
     // NECESSARY STATE HARE
     const [switchTab, setSwitchTab] = useState("Employee");
     const [birthDay, onChange] = useState(new Date());
@@ -96,6 +96,7 @@ const Registration = () => {
                         timer: 3000
                     });
                 })
+                setLoading(true)
                 navigate("/")
             })
             .catch(err => {

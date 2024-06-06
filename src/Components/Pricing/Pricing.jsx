@@ -1,11 +1,13 @@
 import React from 'react';
 import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
+import { Link } from 'react-router-dom';
+import Button from '../../Shared/Button/Button';
 
 const Pricing = () => {
     return (
         <section className="py-20 dark:bg-gray-100 dark:text-gray-800">
             <div className="container px-4 mx-auto">
-                <SectionTitle subTitle={"Our Best Pricing"} heading={"Choose Your Best Price"}/>
+                <SectionTitle subTitle={"Our Best Pricing"} heading={"Choose Your Best Price"} />
                 <div className="flex flex-wrap items-center  -mx-4">
                     <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 ">
                         <div className="flex flex-grow flex-col p-6 space-y-6 border rounded shadow sm:p-8 dark:bg-gray-50">
@@ -36,7 +38,9 @@ const Pricing = () => {
                                     <span>HR manager Dashboard.</span>
                                 </li>
                             </ul>
-                            <button type="button" className="inline-block px-5 py-3 font-semibold tracking-wider text-center rounded dark:bg-violet-600 dark:text-gray-50">Get Started</button>
+                            <Link to="/payment-confirm" className='flex justify-center'>
+                                <Button btnName={"Get Start"} />
+                            </Link>
                         </div>
                     </div>
                     <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 lg:h-[550px]">
@@ -68,7 +72,9 @@ const Pricing = () => {
                                     <span>HR manager Dashboard.</span>
                                 </li>
                             </ul>
-                            <a rel="noopener noreferrer" href="#" className="inline-block w-full px-5 py-3 font-bold tracking-wider text-center rounded dark:bg-gray-100 dark:text-violet-600">Get Started</a>
+                            <Link to="/payment-confirm" className=''>
+                                <Button btnName={"Get Start"} style={"bg-blue-400 "} />
+                            </Link>
                         </div>
                     </div>
                     <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 " >
@@ -100,7 +106,9 @@ const Pricing = () => {
                                     <span>HR manager Dashboard.</span>
                                 </li>
                             </ul>
-                            <a rel="noopener noreferrer" href="#" className="inline-block w-full px-5 py-3 font-semibold tracking-wider text-center rounded dark:bg-violet-600 dark:text-gray-50">Get Started</a>
+                            <Link to="/payment-confirm" className='flex justify-center'>
+                                <Button btnName={"Get Start"} />
+                            </Link>
                         </div>
                     </div>
                 </div>
