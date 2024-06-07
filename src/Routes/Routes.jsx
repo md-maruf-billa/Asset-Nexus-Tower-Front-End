@@ -7,14 +7,14 @@ import Login from './../Pages/Authentication/Login/Login';
 import Registration from '../Pages/Authentication/Registration/Registration';
 import DashboardLayout from '../Dashboard/DashboardLayout/DashboardLayout';
 import HrHome from '../Dashboard/Hr-Manager/HrHome/HrHome';
-import AddAsset from '../Dashboard/Hr-Manager/AddAsset/AddAsset';
 import CheckAdminRoutes from '../Secure/CheckHrRutes/CheckHrRoutes';
 import EmployeeHome from '../Dashboard/Employee/EmployeeHome/EmployeeHome';
 import CheckEmployeeRoutes from '../Secure/CheckEmployeeRoutes/CheckEmployeeRoutes';
 import CheckHrRoutes from '../Secure/CheckHrRutes/CheckHrRoutes';
-import AssetList from '../Dashboard/Hr-Manager/HrHome/AssetList/AssetList';
 import PaymentPage from '../Components/PaymentPage/PaymentPage';
 import CheckValidUser from '../Secure/CheckValidUser/CheckValidUser';
+import AddAsset from './../Dashboard/Hr-Manager/AddAsset/AddAsset';
+import AssetList from '../Dashboard/Hr-Manager/AssetList/AssetList';
 
 const Routes = createBrowserRouter([
     {

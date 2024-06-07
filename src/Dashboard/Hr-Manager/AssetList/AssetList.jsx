@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { BiSolidEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import useAxiosSecure from '../../../../Utils/Hooks/useAxiosSecure';
+import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import Lottie from "lottie-react";
-import noDataFound from '../../../../assets/Animation/NoDataFound.json'
-import AssetUpdateModal from '../../../DashboardShared/AssetsBarChart/AssetUpdateModal/AssetUpdateModal';
-import useCurrentUser from '../../../../Utils/Hooks/userCurrentUser';
+import noDataFound from '../../../assets/Animation/NoDataFound.json'
+import AssetUpdateModal from '../../DashboardShared/AssetsBarChart/AssetUpdateModal/AssetUpdateModal';
+import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 
 
 const AssetList = () => {

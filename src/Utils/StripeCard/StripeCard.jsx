@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const StripeCard = ({ selectPackage, packageName }) => {
+const StripeCard = ({ selectPackage, packageName,teamMember }) => {
     const { currentUser } = useCurrentUser();
     const axiosSecure = useAxiosSecure();
     const stripe = useStripe();
@@ -58,6 +58,11 @@ const StripeCard = ({ selectPackage, packageName }) => {
             return setErrorMessage(err.message);
         }
         else {
+            const subscription ={
+                subscriptionType : packageName,
+                totalTeams:teamMember
+            }
+            axiosSecure.patch(`/add-subscription/${currentUser.email}`,subscription)
             Swal.fire({
                 position: "center",
                 icon: "success",

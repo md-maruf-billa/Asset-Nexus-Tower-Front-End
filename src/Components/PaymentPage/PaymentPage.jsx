@@ -13,6 +13,7 @@ const PaymentPage = () => {
     // NECESSARY STATE HARE
     const [selectPackage, setSelectPackage] = useState(0);
     const [packageName, setPackageName] = useState("");
+    const [teamMember,setTeamMember] = useState(0);
     const userRole = useAdminCheck();
     const { currentUser } = useCurrentUser();
     const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK)
@@ -60,14 +61,16 @@ const PaymentPage = () => {
                         <div className=" flex items-center justify-between col-span-full">
                             <div>
                                 <label className="text-gray-700 dark:text-gray-200" >Stater </label>
-                                <p onClick={() => { setSelectPackage(5), setPackageName("Stater") }} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 5 && "bg-blue-600 text-white"}`}>
+                                <p onClick={() => { setSelectPackage(5), setPackageName("Stater") ,setTeamMember(5)}} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 5 && "bg-blue-700 text-white"}`}>
                                     <span className='font-bold text-2xl'>$5/</span><small>month</small>
 
                                 </p>
                             </div>
                             <div>
                                 <label className="text-gray-700 dark:text-gray-200" >Basic </label>
-                                <p onClick={() => { setSelectPackage(8), setPackageName("Basic") }} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 8 && "bg-blue-600 text-white"}`}>
+                                <p onClick={() => { setSelectPackage(8), 
+                                    setPackageName("Basic"),
+                                    setTeamMember(10) }} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 8 && "bg-blue-700 text-white"}`}>
                                     <span className='font-bold text-2xl'>$8/</span><small>month</small>
 
                                 </p>
@@ -75,8 +78,10 @@ const PaymentPage = () => {
                             <div>
                                 <label className="text-gray-700 dark:text-gray-200" >Pro </label>
                                 <p
-                                    onClick={() => { setSelectPackage(15), setPackageName("Pro") }}
-                                    className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-600 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 15 && "bg-blue-500 text-white"}`}>
+                                    onClick={() => { setSelectPackage(15), 
+                                        setPackageName("Pro"),
+                                        setTeamMember(20) }}
+                                    className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-600 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 15 && "bg-blue-700 text-white"}`}>
                                     <span className='font-bold text-2xl'>$15/</span><small>month</small>
 
                                 </p>
@@ -88,7 +93,7 @@ const PaymentPage = () => {
 
                     {/* ---------- Hare payment card --------- */}
                     {userRole === "HR Manager" ? <Elements stripe={stripePromise}>
-                        <StripeCard selectPackage={selectPackage} packageName={packageName} />
+                        <StripeCard selectPackage={selectPackage} packageName={packageName} teamMember={teamMember} />
                     </Elements> :
                         <div className='text-center mt-8'>
                             <h2 className='text-sm text-red-600'>You Can,t Buy Package </h2>

@@ -148,11 +148,11 @@ const AssetUpdateModal = ({isOpenModal,setIsOpenModal,assetId,refetch}) => {
 
 
                         <div className="sm:flex justify-between ">
-                            <button 
+                            <p 
                             className='w-full md:w-1/2'
                             onClick={()=> setIsOpenModal(false)}>
                                 <Button btnName={"Cancel"} iconStyle={"hidden"} style={"bg-red-400 hover:bg-red-600"}/>
-                            </button>
+                            </p>
 
 
                            <button 
