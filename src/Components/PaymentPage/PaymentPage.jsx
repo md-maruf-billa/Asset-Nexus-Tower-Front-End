@@ -61,7 +61,7 @@ const PaymentPage = () => {
                         <div className=" flex items-center justify-between col-span-full">
                             <div>
                                 <label className="text-gray-700 dark:text-gray-200" >Stater </label>
-                                <p onClick={() => { setSelectPackage(5), setPackageName("Stater") ,setTeamMember(5)}} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 5 && "bg-blue-700 text-white"}`}>
+                                <p onClick={() => { setSelectPackage(5), setPackageName("Stater") ,setTeamMember(5)}} className={` cursor-pointer rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 5 ? "bg-blue-700 text-white" :"bg-white"}`}>
                                     <span className='font-bold text-2xl'>$5/</span><small>month</small>
 
                                 </p>
@@ -70,7 +70,7 @@ const PaymentPage = () => {
                                 <label className="text-gray-700 dark:text-gray-200" >Basic </label>
                                 <p onClick={() => { setSelectPackage(8), 
                                     setPackageName("Basic"),
-                                    setTeamMember(10) }} className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 8 && "bg-blue-700 text-white"}`}>
+                                    setTeamMember(10) }} className={` cursor-pointer d  rounded-lg hover:bg-blue-500 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 8 ? "bg-blue-700 text-white" :"bg-white"}`}>
                                     <span className='font-bold text-2xl'>$8/</span><small>month</small>
 
                                 </p>
@@ -81,7 +81,7 @@ const PaymentPage = () => {
                                     onClick={() => { setSelectPackage(15), 
                                         setPackageName("Pro"),
                                         setTeamMember(20) }}
-                                    className={`bg-white cursor-pointer dark:bg-gray-900 dark:border-gray-700 dark:hover:bg-gray-800 rounded-lg hover:bg-blue-600 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 15 && "bg-blue-700 text-white"}`}>
+                                    className={` cursor-pointer rounded-lg hover:bg-blue-600 hover:text-white duration-300 transition-colors border px-3 md:px-12 py-2.5 ${selectPackage == 15 ? "bg-blue-700 text-white":"bg-white"}`}>
                                     <span className='font-bold text-2xl'>$15/</span><small>month</small>
 
                                 </p>
