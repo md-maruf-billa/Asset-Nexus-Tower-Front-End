@@ -16,12 +16,13 @@ import CheckValidUser from '../Secure/CheckValidUser/CheckValidUser';
 import AddAsset from './../Dashboard/Hr-Manager/AddAsset/AddAsset';
 import AssetList from '../Dashboard/Hr-Manager/AssetList/AssetList';
 import AllCompanyJobs from '../Pages/AllCompanyJobs/AllCompanyJobs';
+import EmployeeRequestList from '../Dashboard/Hr-Manager/EmployeeRequestList/EmployeeRequestList';
 
 const Routes = createBrowserRouter([
     {
         path: "/",
         element: <Layouts />,
-        errorElement: <Error/>,
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
@@ -33,49 +34,53 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "/registration",
-                element: <Registration/>
+                element: <Registration />
             },
             {
-                path:"/payment-confirm",
-                element:<CheckValidUser><PaymentPage/></CheckValidUser>
+                path: "/payment-confirm",
+                element: <CheckValidUser><PaymentPage /></CheckValidUser>
             },
             {
-                path:"/all-companies",
-                element:<AllCompanyJobs/>
+                path: "/all-companies",
+                element: <AllCompanyJobs />
             }
         ]
     },
 
     // // DASHBOARD ROUTES
     {
-        path:"/dashboard",
-        element:<DashboardLayout/>,
-        children:[
+        path: "/dashboard",
+        element: <DashboardLayout />,
+        children: [
 
             // FOR HR
             {
-                path:"/dashboard",
-                element:<CheckHrRoutes><HrHome/></CheckHrRoutes>
+                path: "/dashboard",
+                element: <CheckHrRoutes><HrHome /></CheckHrRoutes>
             },
             {
-                path:"add-asset",
-                element:<CheckHrRoutes><AddAsset/></CheckHrRoutes>
+                path: "add-asset",
+                element: <CheckHrRoutes><AddAsset /></CheckHrRoutes>
             },
             {
-                path:"asset-list",
-                element:<CheckHrRoutes><AssetList/></CheckHrRoutes>
+                path: "asset-list",
+                element: <CheckHrRoutes><AssetList /></CheckHrRoutes>
+            },
+            {
+                path: "employee-request-list",
+                element: <CheckHrRoutes><EmployeeRequestList /></CheckHrRoutes>
             }
-            
+
             ,
-            
+
 
 
 
             // FOR EMPLOYEE
 
             {
-                path:"/dashboard/employee-home",
-                element:<CheckEmployeeRoutes><EmployeeHome/></CheckEmployeeRoutes>
+                path: "/dashboard/employee-home",
+                element: <CheckEmployeeRoutes><EmployeeHome /></CheckEmployeeRoutes>
             }
         ]
     }

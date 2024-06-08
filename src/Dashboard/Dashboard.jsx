@@ -66,7 +66,7 @@ const Dashboard = () => {
                                         <NavLink to={"asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
                                         <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
                                         <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
-                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Employee Requests List</NavLink>
+                                        <NavLink to={"employee-request-list"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Employee Requests List</NavLink>
                                         <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
                                         <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
                                     </>}
@@ -77,7 +77,7 @@ const Dashboard = () => {
                                 <>
                                     <NavLink to={"/dashboard/employee-home"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
                                     {
-                                        !employeeInformation?.status == "Requested" && <>
+                                        employeeInformation?.status == "Accepted" && <>
 
                                             <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
                                             <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>

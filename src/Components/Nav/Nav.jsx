@@ -88,6 +88,7 @@ const Nav = () => {
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
+                                <li>{currentUser.email}</li>
                                 <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Dashboard</Link></li>
                                 <li onClick={handelLogOut}><a>Logout</a></li>
                             </ul>
