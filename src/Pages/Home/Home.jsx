@@ -3,6 +3,8 @@ import Slider from '../../Components/Slider/Slider';
 import Pricing from '../../Components/Pricing/Pricing';
 import AboutUs from '../../Components/AboutUs/AboutUs';
 import AllCompany from '../../Components/AllCompany/AllCompany';
+import Button from '../../Shared/Button/Button';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -21,7 +23,13 @@ const Home = () => {
                 <Pricing />
 
                 {/* ALL COMPANY */}
-                <AllCompany/>
+                <AllCompany />
+                <div className='flex justify-center items-center mt-8'>
+                    
+                    <Link >
+                        <Button btnName={"See All Company"} />
+                    </Link>
+                </div>
             </div>
         </div>
     );

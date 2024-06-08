@@ -15,13 +15,16 @@ import useAdminCheck from '../Utils/Hooks/useAdminCheck';
 import Swal from 'sweetalert2';
 import useCurrentUser from '../Utils/Hooks/userCurrentUser';
 import { FaBars } from "react-icons/fa6";
+import useUserInformation from '../Utils/Hooks/useUserInformation';
+import useEmployeeInfo from '../Utils/Hooks/useEmployeeInfo';
 
 const Dashboard = () => {
     const userRole = useAdminCheck();
     const { logOut } = useCurrentUser();
     const navigate = useNavigate()
-    
-    
+    const userInformation = useUserInformation();
+    const employeeInformation = useEmployeeInfo();
+
 
 
 
@@ -48,7 +51,7 @@ const Dashboard = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col items-center justify-center">
                     {/* Page content here */}
-                    <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden"><FaBars/></label>
+                    <label htmlFor="my-drawer-2" className=" drawer-button lg:hidden"><FaBars /></label>
 
                 </div>
                 <div className="drawer-side">
@@ -59,21 +62,28 @@ const Dashboard = () => {
                             userRole === 'HR Manager' ?
                                 <>
                                     <NavLink to={"/dashboard"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> HR Dashboard</NavLink>
-                                    <NavLink to={"asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
-                                    <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Custom Requests List</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
+                                    {userInformation?.packageInfo && <>
+                                        <NavLink to={"asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
+                                        <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
+                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
+                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Employee Requests List</NavLink>
+                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
+                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
+                                    </>}
 
                                 </>
                                 :
 
                                 <>
                                     <NavLink to={"/dashboard/employee-home"} className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Employee Home</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
-                                    <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>
+                                    {
+                                        !employeeInformation?.status == "Requested" && <>
+
+                                            <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Assets</NavLink>
+                                            <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
+                                            <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>
+                                        </>
+                                    }
 
                                 </>
                         }

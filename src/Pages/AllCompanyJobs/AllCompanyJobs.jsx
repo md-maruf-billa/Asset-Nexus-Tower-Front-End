@@ -1,27 +1,26 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
-import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
-import RequestModal from '../RequestModal/RequestModal';
+import RequestModal from '../../Components/RequestModal/RequestModal';
 
-const AllCompany = () => {
-    const [jobId,setJobId] = useState("");
+const AllCompanyJobs = () => {
+    const [jobId,setJobId] = useState("")
     const axiosGlobal = userAxiosGlobal();
-    const { data, isLoading } = useQuery({
-        queryKey: ["all jobs"],
+    const { data } = useQuery({
+        queryKey: ["AllJObs"],
         queryFn: async () => {
-            const result = await axiosGlobal("/all-company")
+            const result = await axiosGlobal("/all-company");
             return result.data;
         }
     })
-    if (isLoading) return;
     return (
         <div className='container mx-auto'>
-            <SectionTitle subTitle={"Best Companies"} heading={"Find Your HR"} />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {
-                    data.map(asset =>
-                        <div className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border">
+                    data?.map(asset =>
+                        <div 
+                        key={asset._id}
+                        className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border">
                             <div className="flex justify-center mt-0 md:justify-end">
                                 <img className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src={asset?.companyProfileImage} />
                             </div>
@@ -34,7 +33,7 @@ const AllCompany = () => {
                             <div className="flex justify-between items-center mt-4">
                                 <img className='size-[50px] rounded-full' src={asset.profileImage} alt="" />
                                 <button
-                                    onClick={() => {document.getElementById('my_modal_3').showModal(),setJobId(asset._id)}}
+                                    onClick={() => { document.getElementById('my_modal_3').showModal(), setJobId(asset._id) }}
                                     className='btn btn-outline border-[#888686]'>
                                     Send Request
                                 </button>
@@ -48,4 +47,4 @@ const AllCompany = () => {
     );
 };
 
-export default AllCompany;
+export default AllCompanyJobs;

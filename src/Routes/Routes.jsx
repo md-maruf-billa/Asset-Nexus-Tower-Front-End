@@ -15,6 +15,7 @@ import PaymentPage from '../Components/PaymentPage/PaymentPage';
 import CheckValidUser from '../Secure/CheckValidUser/CheckValidUser';
 import AddAsset from './../Dashboard/Hr-Manager/AddAsset/AddAsset';
 import AssetList from '../Dashboard/Hr-Manager/AssetList/AssetList';
+import AllCompanyJobs from '../Pages/AllCompanyJobs/AllCompanyJobs';
 
 const Routes = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const Routes = createBrowserRouter([
             {
                 path:"/payment-confirm",
                 element:<CheckValidUser><PaymentPage/></CheckValidUser>
+            },
+            {
+                path:"/all-companies",
+                element:<AllCompanyJobs/>
             }
         ]
     },
