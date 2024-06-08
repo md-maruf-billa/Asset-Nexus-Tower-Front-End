@@ -17,6 +17,8 @@ import AddAsset from './../Dashboard/Hr-Manager/AddAsset/AddAsset';
 import AssetList from '../Dashboard/Hr-Manager/AssetList/AssetList';
 import AllCompanyJobs from '../Pages/AllCompanyJobs/AllCompanyJobs';
 import EmployeeRequestList from '../Dashboard/Hr-Manager/EmployeeRequestList/EmployeeRequestList';
+import EmployeeAssetList from '../Dashboard/Employee/EmployeeAssestList/EmployeeAssetList';
+import EmployeeAssetRequest from '../Dashboard/Employee/EmployeeAssetRequest/EmployeeAssetRequest';
 
 const Routes = createBrowserRouter([
     {
@@ -81,6 +83,14 @@ const Routes = createBrowserRouter([
             {
                 path: "/dashboard/employee-home",
                 element: <CheckEmployeeRoutes><EmployeeHome /></CheckEmployeeRoutes>
+            },
+            {
+                path:"employee-asset-list",
+                element:<CheckEmployeeRoutes><EmployeeAssetList/></CheckEmployeeRoutes>
+            },
+            {
+                path:"employee-asset-request",
+                element:<CheckEmployeeRoutes><EmployeeAssetRequest/></CheckEmployeeRoutes>
             }
         ]
     }
