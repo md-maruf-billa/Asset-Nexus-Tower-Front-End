@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import useCurrentUser from '../../Utils/Hooks/userCurrentUser';
 import Swal from 'sweetalert2';
 import { useQuery } from '@tanstack/react-query'
 import userAxiosGlobal from '../../Utils/Hooks/userAxiosGlobal';
 import useAdminCheck from '../../Utils/Hooks/useAdminCheck';
-import { useForm } from "react-hook-form"
 
 
 
@@ -84,11 +82,11 @@ const Nav = () => {
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
                                 <li>
                                     <a className="justify-between">
-                                        {userInfo?.userType}
+                                        {userRole}
                                         <span className="badge">New</span>
                                     </a>
                                 </li>
-                                <li>{currentUser.email}</li>
+                                
                                 <li><Link to={`${userRole == "HR Manager" ? "/dashboard" : "/dashboard/employee-home"}`}>Dashboard</Link></li>
                                 <li onClick={handelLogOut}><a>Logout</a></li>
                             </ul>

@@ -4,10 +4,13 @@ import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import useEmployeeInfo from '../../../Utils/Hooks/useEmployeeInfo';
 import Lottie from 'lottie-react';
 import noDataFound from '../../../assets/Animation/NoDataFound.json'
+import SendRequestForAsset from '../../../Components/Modal/SendRequestForAsset/SendRequestForAsset';
 const EmployeeAssetRequest = () => {
     const axisSecure = useAxiosSecure();
     const employeeInformation = useEmployeeInfo();
-    const [filterData, setFilterData] = useState("")
+    const [filterData, setFilterData] = useState("");
+    const [assetId, setAssetId] = useState("");
+    const [modalOpen , setModalOpen] = useState(false);
     const { data: allAsset, isLoading, refetch } = useQuery({
         queryKey: ["Load all asset under my hr"],
         queryFn: async () => {
@@ -24,6 +27,8 @@ const EmployeeAssetRequest = () => {
         <div className='w-full py-10'>
             <div className='flex items-center justify-between'>
                 <h3 className='text-4xl mb-4'>Your Company Assets List :</h3>
+
+
                 <label className="form-control w-full max-w-[200px]">
                     <div className="label">
                         <span className="label-text">Filter depend of stock</span>
@@ -41,7 +46,7 @@ const EmployeeAssetRequest = () => {
             {
                 allAsset.length === 0 ?
                     <div className='flex justify-center items-center'>
-                        <Lottie className='w-1/3' animationData={noDataFound} />
+                        <Lottie className='w-1/2' animationData={noDataFound} />
                     </div> :
                     <div className="overflow-x-auto mt-10">
                         <table className="table table-zebra">
@@ -82,8 +87,11 @@ const EmployeeAssetRequest = () => {
                                             <td>{asset.addedTime}</td>
                                             <td>
                                                 <button
-                                                    onClick={() => { setIsOpenModal(true), setAssetId(asset._id) }}
-                                                    className='btn btn-sm border-[#817f7f] bg-green-100'>
+                                                    onClick={() => {
+                                                            setModalOpen(true),
+                                                            setAssetId(asset._id)
+                                                    }}
+                                                    className={`btn btn-sm border-[#817f7f] bg-green-100 ${asset.productQuantity == 0 && "btn-disabled"}`}>
                                                     Send Request
                                                 </button>
 
@@ -95,11 +103,11 @@ const EmployeeAssetRequest = () => {
                                 }
 
 
+                                <SendRequestForAsset assetId={assetId} modalOpen={modalOpen} setModalOpen={setModalOpen}/>
                             </tbody>
                         </table>
                     </div>
             }
-
 
         </div>
     );

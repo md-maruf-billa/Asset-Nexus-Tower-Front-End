@@ -26,7 +26,7 @@ const Home = () => {
                 <AllCompany />
                 <div className='flex justify-center items-center mt-8'>
                     
-                    <Link >
+                    <Link to={"/all-companies"}>
                         <Button btnName={"See All Company"} />
                     </Link>
                 </div>

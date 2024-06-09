@@ -19,6 +19,7 @@ import AllCompanyJobs from '../Pages/AllCompanyJobs/AllCompanyJobs';
 import EmployeeRequestList from '../Dashboard/Hr-Manager/EmployeeRequestList/EmployeeRequestList';
 import EmployeeAssetList from '../Dashboard/Employee/EmployeeAssestList/EmployeeAssetList';
 import EmployeeAssetRequest from '../Dashboard/Employee/EmployeeAssetRequest/EmployeeAssetRequest';
+import TotalEmployeeList from '../Dashboard/Hr-Manager/TotalEmployeeList/TotalEmployeeList';
 
 const Routes = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ const Routes = createBrowserRouter([
             {
                 path: "employee-request-list",
                 element: <CheckHrRoutes><EmployeeRequestList /></CheckHrRoutes>
+            },
+            {
+                path:"total-employee-list",
+                element:<CheckHrRoutes><TotalEmployeeList/></CheckHrRoutes>
             }
 
             ,

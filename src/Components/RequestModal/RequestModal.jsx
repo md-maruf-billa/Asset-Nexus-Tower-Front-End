@@ -30,9 +30,9 @@ const RequestModal = ({ jobId }) => {
         const employeeName = formData.employeeName.value;
         const employeeEmail = formData.employeeEmail.value;
         const status = "Requested";
-        const employeeProfileImage = currentUser.photoURl;
+        
 
-        const employeeRequestInfo = {companyName,hrEmail,hrName,employeeEmail,employeeName,status,employeeProfileImage};
+        const employeeRequestInfo = {companyName,hrEmail,hrName,employeeEmail,employeeName,status,employeeProfileImage:currentUser.photoURL};
         axiosSecure.post("/register-team",employeeRequestInfo)
         .then(res=>{
             if(res.data?.insertedId){
