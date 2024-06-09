@@ -25,8 +25,8 @@ const SendRequestForAsset = ({ assetId ,modalOpen,setModalOpen}) => {
     useEffect(() => { refetch() }, [assetId]);
     const [state, setState] = useState([
         {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 7),
+            startDate: new Date().toLocaleDateString(),
+            endDate: addDays(new Date().toLocaleDateString(), 7),
             key: 'selection'
         }
     ]);
@@ -36,17 +36,21 @@ const SendRequestForAsset = ({ assetId ,modalOpen,setModalOpen}) => {
         const productName = asset.productName;
         const employeeEmail = currentUser.email;
         const productType = asset.productType;
-        const requestedDate = state[0];
+        const requestedDate = {
+            startDate: state[0].startDate.toLocaleDateString(),
+            endDate : state[0].endDate.toLocaleDateString()
+        };
         const hrEmail = asset.hrEmail;
         const hrName = asset.hrName;
         const employeeName = currentUser.displayName;
         const requestQuantity = needQuantity;
+        const assetImage = asset.assetImage;
+        const status = "Pending"
 
-        const requestDetails = {productName,employeeEmail,employeeName,productName,productType,requestedDate,hrEmail,hrName,requestQuantity};
+        const requestDetails = {productName,employeeEmail,employeeName,productName,productType,requestedDate,hrEmail,hrName,requestQuantity,assetImage,status};
 
         axiosSecure.post("/save-request-data",requestDetails)
         .then(res=>{
-            console.log(res.data)
             if(res.data.insertedId){
                 Swal.fire({
                     position: "center",
@@ -54,7 +58,7 @@ const SendRequestForAsset = ({ assetId ,modalOpen,setModalOpen}) => {
                     title: "Successfully Saved",
                     text: "Your Asset request is successfully save. Wait for HR confirmation.",
                     showConfirmButton: false,
-                    timer: 3000
+                    timer: 1500
                 });
                 setModalOpen(false)
             }
@@ -179,7 +183,7 @@ const SendRequestForAsset = ({ assetId ,modalOpen,setModalOpen}) => {
                             className='btn btn-success text-white'
                             onClick={submitAssetRequest}
                             type="button" >
-                                Send invites
+                                Send Request
                             </button>
                         </div>
                         </form>
