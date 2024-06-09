@@ -20,7 +20,6 @@ const RequestModal = ({ jobId }) => {
     useEffect(()=>{
         refetch()
     },[jobId])
-
     const handelRequestSubmit =(e)=>{
         e.preventDefault();
         const formData = e.target;
@@ -29,10 +28,11 @@ const RequestModal = ({ jobId }) => {
         const hrEmail = formData.hrEmail.value;
         const employeeName = formData.employeeName.value;
         const employeeEmail = formData.employeeEmail.value;
+        const companyLogo = asset.companyProfileImage;
         const status = "Requested";
         
 
-        const employeeRequestInfo = {companyName,hrEmail,hrName,employeeEmail,employeeName,status,employeeProfileImage:currentUser.photoURL};
+        const employeeRequestInfo = {companyName,hrEmail,hrName,employeeEmail,employeeName,status,employeeProfileImage:currentUser.photoURL,companyLogo};
         axiosSecure.post("/register-team",employeeRequestInfo)
         .then(res=>{
             if(res.data?.insertedId){

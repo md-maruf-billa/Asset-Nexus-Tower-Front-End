@@ -20,6 +20,7 @@ import EmployeeRequestList from '../Dashboard/Hr-Manager/EmployeeRequestList/Emp
 import EmployeeAssetList from '../Dashboard/Employee/EmployeeAssestList/EmployeeAssetList';
 import EmployeeAssetRequest from '../Dashboard/Employee/EmployeeAssetRequest/EmployeeAssetRequest';
 import TotalEmployeeList from '../Dashboard/Hr-Manager/TotalEmployeeList/TotalEmployeeList';
+import AddAnEmployee from '../Dashboard/Hr-Manager/AddAnEmployee/AddAnEmployee';
 
 const Routes = createBrowserRouter([
     {
@@ -76,6 +77,10 @@ const Routes = createBrowserRouter([
             {
                 path:"total-employee-list",
                 element:<CheckHrRoutes><TotalEmployeeList/></CheckHrRoutes>
+            },
+            {
+                path:"add-employee",
+                element:<CheckHrRoutes><AddAnEmployee/></CheckHrRoutes>
             }
 
             ,

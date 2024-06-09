@@ -68,7 +68,7 @@ const Dashboard = () => {
                                         <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
                                         <NavLink to={"employee-request-list"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Employee Requests List</NavLink>
                                         <NavLink to={"total-employee-list"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
-                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
+                                        <NavLink to={"add-employee"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
                                     </>}
 
                                 </>
