@@ -4,6 +4,7 @@ import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 import { useQuery } from '@tanstack/react-query';
 import useUserInformation from '../../../Utils/Hooks/useUserInformation';
 import Swal from 'sweetalert2';
+import { FaUsers } from 'react-icons/fa6';
 
 const TotalEmployeeList = () => {
     const axiosSecure = useAxiosSecure();
@@ -66,13 +67,17 @@ const TotalEmployeeList = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10'>
                 {
                     data?.map(employee =>
-                        <div class=" overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                            <img class="object-cover w-full h-56" src={employee.employeeProfileImage} alt="avatar" />
+                        <div className=" overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                            <img className="object-cover w-full h-56" src={employee.employeeProfileImage} alt="avatar" />
 
-                            <div class="p-5 flex items-center justify-between">
+                            <div className="p-5 flex items-center justify-between">
                                 <span>
-                                    <h3 class="block text-xl font-bold text-gray-800 dark:text-white" tabindex="0" role="link">{employee.employeeName}</h3>
-                                    <span class="text-sm text-gray-700 dark:text-gray-200">{employee.employeeEmail}</span>
+                                    <h3 className="block text-xl font-bold text-gray-800 dark:text-white" tabindex="0" role="link">{employee.employeeName}</h3>
+                                    <span className="text-sm text-gray-700 dark:text-gray-200">{employee.employeeEmail}</span>
+                                    <p className='text-sm flex  items-center gap-2'>
+                                        <FaUsers/>
+                                        Type : Employee
+                                    </p>
                                 </span>
                                 <button 
                                 onClick={()=>handelRemoveEmployee(employee.employeeEmail,employee.employeeName)}

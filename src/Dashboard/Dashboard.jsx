@@ -65,7 +65,7 @@ const Dashboard = () => {
                                     {userInformation?.packageInfo && <>
                                         <NavLink to={"asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> Assets List</NavLink>
                                         <NavLink to={"add-asset"} className="flex gap-2 items-center p-2 rounded-lg"><RiFunctionAddFill />Add an Assets</NavLink>
-                                        <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
+                                        <NavLink to={"all-asset-request-list"} className="flex gap-2 items-center p-2 rounded-lg"><BsChatSquareQuoteFill />All Request's</NavLink>
                                         <NavLink to={"employee-request-list"} className="flex gap-2 items-center p-2 rounded-lg"><MdAddBusiness />Employee Requests List</NavLink>
                                         <NavLink to={"total-employee-list"} className="flex gap-2 items-center p-2 rounded-lg"><GiTeamIdea />My Employee List</NavLink>
                                         <NavLink to={"add-employee"} className="flex gap-2 items-center p-2 rounded-lg"><IoPersonAdd />Add an Employee</NavLink>
