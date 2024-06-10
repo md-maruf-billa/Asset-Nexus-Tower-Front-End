@@ -1,6 +1,14 @@
 # Asset Nexus Tower
 #### Live Link - https://asset-nexus-tower.web.app/
 
+#### HR Test account:
+- HR Email - eng.marufbilla@gmail.com
+- Password - Maruf#3
+
+#### Employee Test account:
+- Employee Email - rahat@gmail.com
+- Password - Maruf#3
+
 ## To Features in this Web-site-
 - Verify a user type (Employee or HR Manager) when login or registration .
 - Data sort and filter system.
@@ -21,6 +29,8 @@
 ## Need Technology-
 - react-stripe-js
 - tanstack-query
+- Stripe
+- Tailwind css
 - axios
 - daisyui
 - firebase
