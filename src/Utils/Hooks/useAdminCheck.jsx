@@ -5,7 +5,7 @@ import Loader from "../../Shared/Loader/Loader";
 
 const useAdminCheck = () => {
     const axiosSecure = useAxiosSecure();
-    const { data: role , isLoading } = useQuery({
+    const { data: role=[] , isLoading } = useQuery({
         queryKey: ["user role"],
         queryFn: async () => {
             const result = await axiosSecure(`/verify-role`);
