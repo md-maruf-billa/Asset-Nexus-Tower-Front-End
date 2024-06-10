@@ -47,6 +47,8 @@
 - recharts
 - sweetalert2
 - swiper
+- react-helmet-async
+- react-pdf
 
 
 ## How can you start this project in your local computer?

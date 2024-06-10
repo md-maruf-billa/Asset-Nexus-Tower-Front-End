@@ -16,7 +16,7 @@ const AssetList = () => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [assetId, setAssetId] = useState("");
     const [filterData, setFilterData] = useState("")
-    const [range , setRange] = useState(0);
+    const [range, setRange] = useState(0);
     console.log(range)
     // LOAD ALL ASSET
     const { data: allAsset, isLoading, refetch } = useQuery({
@@ -71,15 +71,24 @@ const AssetList = () => {
 
     if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
     return (
-        <div className='w-full py-10'>
-            <div className='flex justify-between items-end mb-10'>
-                <h3 className='text-4xl mb-4'>Your All Assets List :</h3>
-                <div>
-                    <input 
-                    onChange={(e)=>setRange(e.target.value)}
-                    type="range" min="0" max="500" value={range} className="range" />
-                </div>
-                <label className="form-control w-full max-w-[200px]">
+        <div className='w-full py-10 px-2'>
+            <h3 className='text-5xl font-rancho mb-8 text-center text-[#cd5bcd]'>Your All Assets List :</h3>
+            <div className='flex justify-between gap-3 mb-10'>
+                
+                <label className="form-control ">
+                    <div className="label">
+                        <span className="label-text">Sort on Quantity</span>
+                    </div>
+                    <select
+                        // onChange={(e) => setFilterData(e.target.value)}
+                        className="select select-bordered">
+                        <option disabled selected>Select on</option>
+                        <option>Low to High</option>
+                        <option>High to Low</option>
+
+                    </select>
+                </label>
+                <label className="form-control ">
                     <div className="label">
                         <span className="label-text">Filter depend of stock</span>
                     </div>
@@ -95,8 +104,8 @@ const AssetList = () => {
             </div>
             {
                 allAsset.length === 0 ? <div className='flex justify-center items-center w-full'><Lottie className='w-1/2' animationData={noDataFound} /></div> :
-                    <div className="overflow-x-auto">
-                        <table className="table table-zebra">
+                    <div className="overflow-x-auto w-full">
+                        <table className="table table-zebra w-full">
                             {/* head */}
                             <thead>
                                 <tr>

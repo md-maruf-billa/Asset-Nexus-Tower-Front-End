@@ -24,7 +24,7 @@ const AllRequestAssets = () => {
     // update current status
     const updateStatus = (id, status) => {
         const time = new Date().toLocaleDateString();
-        axiosSecure.patch(`/update-request-status/${id}`, { status: status ,acceptedDate : time})
+        axiosSecure.patch(`/update-request-status/${id}`, { status: status, acceptedDate: time })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
@@ -95,7 +95,8 @@ const AllRequestAssets = () => {
 
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Requested for</th>
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Requested Quantity</th>
-                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Action</th>
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Accept</th>
+                                            <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Reject</th>
 
 
                                         </tr>
@@ -120,7 +121,7 @@ const AllRequestAssets = () => {
                                                         <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
-                                                            <h2 className={`text-sm font-normal  ${assets.status == "Pending" ? "text-yellow-700" :assets.status == "Rejected"?"text-red-700": "text-emerald-500"}`}>{assets.status}</h2>
+                                                            <h2 className={`text-sm font-normal  ${assets.status == "Pending" ? "text-yellow-700" : assets.status == "Rejected" ? "text-red-700" : "text-emerald-500"}`}>{assets.status}</h2>
                                                         </div>
                                                     </td>
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{assets.productType}</td>
@@ -129,13 +130,16 @@ const AllRequestAssets = () => {
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{assets.requestedDate.startDate} To {assets.requestedDate.endDate}</td>
                                                     <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{assets.requestQuantity}</td>
 
-                                                    <td className='space-x-4'>
+                                                    <td >
                                                         <button
                                                             onClick={() => updateStatus(assets._id, "Accepted")}
                                                             disabled={assets.status == "Accepted"} className='btn btn-sm bg-green-300'><IoCheckmarkCircleOutline /> Accept</button>
+
+                                                    </td>
+                                                    <td>
                                                         <button
                                                             onClick={() => updateStatus(assets._id, "Rejected")}
-                                                            disabled={assets.status == "Accepted" || assets.status =="Rejected"} className='btn btn-sm bg-red-300'> <MdCancel /> Reject</button>
+                                                            disabled={assets.status == "Accepted" || assets.status == "Rejected"} className='btn btn-sm bg-red-300'> <MdCancel /> Reject</button>
                                                     </td>
                                                 </tr>
 

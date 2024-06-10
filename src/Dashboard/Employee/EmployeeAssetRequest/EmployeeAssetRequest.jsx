@@ -5,6 +5,7 @@ import useEmployeeInfo from '../../../Utils/Hooks/useEmployeeInfo';
 import Lottie from 'lottie-react';
 import noDataFound from '../../../assets/Animation/NoDataFound.json'
 import SendRequestForAsset from '../../../Components/Modal/SendRequestForAsset/SendRequestForAsset';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 const EmployeeAssetRequest = () => {
     const axisSecure = useAxiosSecure();
     const employeeInformation = useEmployeeInfo();
@@ -25,8 +26,9 @@ const EmployeeAssetRequest = () => {
 
     return (
         <div className='w-full py-10'>
+            <PageTitle title={"Employee Requests"}/>
             <div className='flex items-center justify-between'>
-                <h3 className='text-4xl mb-4'>Your Company Assets List :</h3>
+                <h3 className='text-2xl  md:text-4xl font-rancho mb-4'>Your Company Assets List :</h3>
 
 
                 <label className="form-control w-full max-w-[200px]">

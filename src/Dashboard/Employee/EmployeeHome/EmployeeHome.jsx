@@ -4,11 +4,13 @@ import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import LinearChart from '../../../Components/StaticChart/LinearChart/LinearChart';
 import PieCharts from '../../../Components/StaticChart/PieChart/PieCharts';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const EmployeeHome = () => {
     const employeeInformation = useEmployeeInfo();
     return (
         <div>
+            <PageTitle title={"Employee Home"}/>
             {
                 employeeInformation?.hrEmail ? <>
                     {
@@ -30,15 +32,21 @@ const EmployeeHome = () => {
                             </> :
 
                                 <>
-                                    <div className='px-3'>
-                                        <h3 className='font-rancho text-4xl md:text-6xl text-[#cd5bcd] text-center my-8'>Static Graph Chart</h3>
+                                    <div className='px-3 flex flex-col justify-between'>
+                                        <div>
+                                            <div className='flex items-center gap-2'>
+                                                <p className='text-4xl md:text-6xl font-rancho'>Welcome</p>
+                                                <p className='text-4xl md:text-6xl font-rancho text-[#cd5bcd]'>{employeeInformation?.employeeName}</p>
+                                            </div>
+                                            <h3 className='font-rancho text-4xl md:text-6xl text-center my-8'>Static Graph Chart</h3>
 
-                                        <div className='flex flex-col md:flex-row items-center'> 
-                                            <LinearChart />
-                                            <PieCharts/>
+                                            <div className='flex flex-col md:flex-row items-center'>
+                                                <LinearChart />
+                                                <PieCharts />
+                                            </div>
                                         </div>
 
-                                        <p className='text-red-600 text-xl absolute bottom-4 left-1/3'>This Chart is static . Developer will Developed as soon as possible. 🥰🥰🥰</p>
+                                        <p className='text-red-600 text-xl'>This Chart is static . Developer will Developed as soon as possible. 🥰🥰🥰</p>
                                     </div>
                                 </>
                     }

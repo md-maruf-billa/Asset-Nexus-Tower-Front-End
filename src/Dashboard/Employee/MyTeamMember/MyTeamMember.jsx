@@ -3,6 +3,7 @@ import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { VscTypeHierarchySuper } from "react-icons/vsc";
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const MyTeamMember = () => {
     const { currentUser } = useCurrentUser();
@@ -20,6 +21,7 @@ const MyTeamMember = () => {
     console.log(data)
     return (
         <div>
+            <PageTitle title={"My Team Member"}/>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-2 mt-4' >
                 {
                     data.map(employee =>

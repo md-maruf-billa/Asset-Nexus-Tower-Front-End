@@ -6,6 +6,7 @@ import useCurrentUser from './../../../Utils/Hooks/userCurrentUser';
 import { useQuery } from '@tanstack/react-query';
 import Lottie from 'lottie-react';
 import noData from '../../../assets/Animation/NoDataFound.json'
+import PageTitle from './../../../Shared/PageTitle/PageTitle';
 const EmployeeAssetList = () => {
     const axiosSecure = useAxiosSecure();
     const { currentUser } = useCurrentUser();
@@ -24,6 +25,7 @@ const EmployeeAssetList = () => {
     return (
         <div>
             <section className="container px-4 mx-auto mt-6">
+                <PageTitle title={"Requested Assets"}/>
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">Total Requests</h2>
 

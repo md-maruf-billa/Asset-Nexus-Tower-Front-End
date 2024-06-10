@@ -7,6 +7,7 @@ import userAxiosGlobal from '../../../Utils/Hooks/userAxiosGlobal';
 import { updateProfile } from 'firebase/auth';
 import auth from '../../../Pages/Firebase/firebase.config';
 import Swal from 'sweetalert2';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const UpdateProfile = () => {
     const axiosGlobal = userAxiosGlobal();
@@ -55,6 +56,7 @@ const UpdateProfile = () => {
 
     return (
         <div className='flex justify-center items-center h-full'>
+            <PageTitle title={"Update Profile"}/>
             <div className="flex flex-col justify-center w-full max-w-lg p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-50 dark:text-gray-800">
                 <img src={currentUser?.photoURL} alt="" className="size-40 mx-auto object-center rounded-full dark:bg-gray-500 aspect-square" />
                 <div className="space-y-4 divide-y dark:divide-gray-300 flex flex-col items-center  justify-center">
