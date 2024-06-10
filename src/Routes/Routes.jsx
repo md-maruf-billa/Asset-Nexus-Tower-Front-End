@@ -22,6 +22,7 @@ import EmployeeAssetRequest from '../Dashboard/Employee/EmployeeAssetRequest/Emp
 import TotalEmployeeList from '../Dashboard/Hr-Manager/TotalEmployeeList/TotalEmployeeList';
 import AddAnEmployee from '../Dashboard/Hr-Manager/AddAnEmployee/AddAnEmployee';
 import AllRequestAssets from '../Dashboard/Hr-Manager/AllRequestAssets/AllRequestAssets';
+import UpdateProfile from '../Components/Update/UpdateProfile/UpdateProfile';
 
 const Routes = createBrowserRouter([
     {
@@ -76,18 +77,22 @@ const Routes = createBrowserRouter([
                 element: <CheckHrRoutes><EmployeeRequestList /></CheckHrRoutes>
             },
             {
-                path:"total-employee-list",
-                element:<CheckHrRoutes><TotalEmployeeList/></CheckHrRoutes>
+                path: "total-employee-list",
+                element: <CheckHrRoutes><TotalEmployeeList /></CheckHrRoutes>
             },
             {
-                path:"add-employee",
-                element:<CheckHrRoutes><AddAnEmployee/></CheckHrRoutes>
+                path: "add-employee",
+                element: <CheckHrRoutes><AddAnEmployee /></CheckHrRoutes>
             },
             {
-                path:"all-asset-request-list",
-                element: <CheckHrRoutes><AllRequestAssets/></CheckHrRoutes>
+                path: "all-asset-request-list",
+                element: <CheckHrRoutes><AllRequestAssets /></CheckHrRoutes>
             }
-
+            ,
+            {
+                path: "update-user-profile",
+                element: <CheckValidUser><UpdateProfile /></CheckValidUser>
+            }
             ,
 
 
@@ -100,12 +105,12 @@ const Routes = createBrowserRouter([
                 element: <CheckEmployeeRoutes><EmployeeHome /></CheckEmployeeRoutes>
             },
             {
-                path:"employee-asset-list",
-                element:<CheckEmployeeRoutes><EmployeeAssetList/></CheckEmployeeRoutes>
+                path: "employee-asset-list",
+                element: <CheckEmployeeRoutes><EmployeeAssetList /></CheckEmployeeRoutes>
             },
             {
-                path:"employee-asset-request",
-                element:<CheckEmployeeRoutes><EmployeeAssetRequest/></CheckEmployeeRoutes>
+                path: "employee-asset-request",
+                element: <CheckEmployeeRoutes><EmployeeAssetRequest /></CheckEmployeeRoutes>
             }
         ]
     }

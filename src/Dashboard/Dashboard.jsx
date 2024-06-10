@@ -91,7 +91,7 @@ const Dashboard = () => {
                         <>
                             <div className='divider'></div>
                             <NavLink to={"/"} end className="flex gap-2 items-center p-2 rounded-lg"><FaHouse /> Home</NavLink>
-                            <NavLink to={"student-home"} end className="flex gap-2 items-center p-2 rounded-lg"><BiMessageSquareEdit /> Edit Profile</NavLink>
+                            <NavLink to={"update-user-profile"} end className="flex gap-2 items-center p-2 rounded-lg"><BiMessageSquareEdit /> Edit Profile</NavLink>
                             <button onClick={handelLogout} className="flex gap-2 items-center p-2 rounded-lg"><FiLogOut /> Log Out</button>
 
                         </>
