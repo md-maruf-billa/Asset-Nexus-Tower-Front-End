@@ -2,6 +2,8 @@ import React from 'react';
 import useEmployeeInfo from '../../../Utils/Hooks/useEmployeeInfo';
 import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
+import LinearChart from '../../../Components/StaticChart/LinearChart/LinearChart';
+import PieCharts from '../../../Components/StaticChart/PieChart/PieCharts';
 
 const EmployeeHome = () => {
     const employeeInformation = useEmployeeInfo();
@@ -28,8 +30,15 @@ const EmployeeHome = () => {
                             </> :
 
                                 <>
-                                    <div>
-                                        <h2>HEHE tumi pas</h2>
+                                    <div className='px-3'>
+                                        <h3 className='font-rancho text-4xl md:text-6xl text-[#cd5bcd] text-center my-8'>Static Graph Chart</h3>
+
+                                        <div className='flex flex-col md:flex-row items-center'> 
+                                            <LinearChart />
+                                            <PieCharts/>
+                                        </div>
+
+                                        <p className='text-red-600 text-xl absolute bottom-4 left-1/3'>This Chart is static . Developer will Developed as soon as possible. 🥰🥰🥰</p>
                                     </div>
                                 </>
                     }

@@ -23,7 +23,7 @@ const EmployeeAssetList = () => {
 </div>
     return (
         <div>
-            <section className="container px-4 mx-auto">
+            <section className="container px-4 mx-auto mt-6">
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">Total Requests</h2>
 
