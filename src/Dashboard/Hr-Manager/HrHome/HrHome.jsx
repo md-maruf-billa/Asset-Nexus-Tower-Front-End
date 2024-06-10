@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 const HrHome = () => {
     const { currentUser } = useCurrentUser();
     const userInformation = useUserInformation();
+    if (!userInformation) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2 text-pink-500"></span>
+
 
     return (
         <>
@@ -35,7 +37,7 @@ const HrHome = () => {
                     </div>
                 </div> :
                     <div className='flex flex-col items-center justify-center h-full gap-8'>
-                        <h3 className='flex text-5xl items-center gap-5 text-red-600 font-bold'><RxCrossCircled/> Opps !!</h3>
+                        <h3 className='flex text-5xl items-center gap-5 text-red-600 font-bold'><RxCrossCircled /> Opps !!</h3>
                         <p>You Currently use free account. To get all features <Link to={"/payment-confirm"} className='text-blue-600 underline'>SubsCribe</Link> Now</p>
                     </div>
             }

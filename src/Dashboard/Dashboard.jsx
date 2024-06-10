@@ -81,7 +81,7 @@ const Dashboard = () => {
 
                                             <NavLink to={"employee-asset-list"} className="flex gap-2 items-center p-2 rounded-lg"><AiFillProduct /> My Requested Assets</NavLink>
                                             <NavLink to={"employee-asset-request"} className="flex gap-2 items-center p-2 rounded-lg"><VscGitPullRequestGoToChanges /> Request an Assets</NavLink>
-                                            <NavLink to={"/"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
+                                            <NavLink to={"my-team-member"} className="flex gap-2 items-center p-2 rounded-lg"><BsMicrosoftTeams /> My Team</NavLink>
                                         </>
                                     }
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const userAxiosGlobal = () => {
     const axiosGlobal = axios.create({
-        baseURL:"http://localhost:7000/"
+        baseURL:import.meta.env.VITE_BASE_URL,
     })
     return axiosGlobal;
 };

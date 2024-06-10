@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 import Swal from 'sweetalert2';
 import { FaEyeSlash } from 'react-icons/fa6';
@@ -61,13 +61,13 @@ const Login = () => {
     }
     return (
 
-        <div className="hero min-h-screen bg-[url(/loginPageBg.png)] ">
-            <div className="card  w-full max-w-sm md:max-w-lg py-8 shadow-2xl bg-white bg-opacity-15">
+        <div className="hero min-h-screen  bg-[#1d191923]">
+            <div className="card  w-full max-w-sm md:max-w-lg py-8 shadow-2xl bg-white">
                 <div className='flex justify-center items-center'>
                     <img className='size-[150px]' src="/logo.png" alt="" />
                 </div>
 
-                <div className='card-body'>
+                <div className='card-body bg-white'>
                     <form onSubmit={handelPasswordLogin}>
                         <div className="form-control">
                             <label className="label">
@@ -94,7 +94,7 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button onClick={() => setButtonLoading(true)}>
-                                <Button btnName={"Login"} style={"w-full"} spinner={buttonLoading} />
+                                <Button btnName={"Login"} style={"w-full bg-blue-500 hover:bg-blue-400"} spinner={buttonLoading} />
                             </button>
                         </div>
                     </form>

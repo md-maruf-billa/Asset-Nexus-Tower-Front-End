@@ -14,7 +14,7 @@ import auth from '../../Firebase/firebase.config';
 
 const Registration = () => {
     const axiosGlobal = userAxiosGlobal();
-    const { createAccountWithPassword ,setLoading} = useCurrentUser();
+    const { createAccountWithPassword, setLoading } = useCurrentUser();
     // NECESSARY STATE HARE
     const [switchTab, setSwitchTab] = useState("Employee");
     const [birthDay, onChange] = useState(new Date());
@@ -77,7 +77,7 @@ const Registration = () => {
         const userType = switchTab;
         const stablishAt = new Date().toLocaleDateString();
 
-        const userAllInformation = { name, email, profileImage, dateOfBirth, userType, companyName, companyProfileImage,stablishAt };
+        const userAllInformation = { name, email, profileImage, dateOfBirth, userType, companyName, companyProfileImage, stablishAt };
 
         // REGISTER USER
         createAccountWithPassword(email, strongPass)
@@ -86,7 +86,7 @@ const Registration = () => {
                     displayName: name,
                     photoURL: photoURL
                 }).then(res => {
-                    axiosGlobal.post("/user-info",userAllInformation)
+                    axiosGlobal.post("/user-info", userAllInformation)
                     Swal.fire({
                         position: "center",
                         icon: "success",
@@ -147,17 +147,17 @@ const Registration = () => {
 
     return (
         <div>
-            <div className="hero min-h-screen bg-[url(/loginPageBg.png)]">
+            <div className="hero min-h-screen bg-[#1d191923]">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-20 w-full">
 
-                    <div className="card shrink-0 w-full max-w-sm lg:max-w-lg shadow-2xl bg-base-100 bg-opacity-15">
+                    <div className="card shrink-0 w-full max-w-sm lg:max-w-lg shadow-2xl bg-base-100 bg-opacity-15 ">
 
 
-                        <form id='form' onSubmit={handelPasswordBasedRegistration} className="card-body">
-                            <h1 className="text-5xl text-center font-bold mb-5">Welcome to ANT</h1>
-                            <div role="tablist" className="tabs tabs-boxed">
-                                <a role="tab" onClick={() => setSwitchTab("Employee")} className={`tab ${switchTab == "Employee" && 'tab-active'}`}>Join as Employee</a>
-                                <a role="tab" onClick={() => setSwitchTab("HR Manager")} className={`tab ${switchTab == "HR Manager" && 'tab-active'}`}>Join as HR</a>
+                        <form id='form' onSubmit={handelPasswordBasedRegistration} className="card-body bg-white rounded-md">
+                            <h1 className="text-6xl text-center font-rancho font-bold mb-5 text-blue-400">Welcome to ANT</h1>
+                            <div role="tablist" className="tabs tabs-boxed bg-transparent">
+                                <a role="tab" onClick={() => setSwitchTab("Employee")} className={`tab  ${switchTab == "Employee" && 'border-b-2 border-blue-600 text-blue-600 font-bold '}`}>Join as Employee</a>
+                                <a role="tab" onClick={() => setSwitchTab("HR Manager")} className={`tab ${switchTab == "HR Manager" && 'border-b-2 border-blue-600 text-blue-600 font-bold '}`}>Join as HR</a>
 
                             </div>
 
@@ -217,18 +217,18 @@ const Registration = () => {
 
 
 
-                            <div>
-                                <label className='label w-full'>
-                                    <span className="label-text font-bold">Date of Birth</span>
-                                </label>
-                                <DatePicker className={"w-full"} onChange={onChange} value={birthDay} />
-                            </div>
                             <div className="flex items-center justify-between gap-10">
+                                <div>
+                                    <label className='label w-full'>
+                                        <span className="label-text font-bold">Date of Birth</span>
+                                    </label>
+                                    <DatePicker className={"w-full"} onChange={onChange} value={birthDay} />
+                                </div>
 
 
 
 
-                                <label htmlFor="profile-image" className="flex flex-col items-center w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+                                <label htmlFor="profile-image" className="flex flex-col  items-center border-2 border-dashed justify-center  w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-gray-500 dark:text-gray-400">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                                     </svg>
@@ -237,7 +237,9 @@ const Registration = () => {
 
                                     <input onChange={(e) => uploadProfileImage(e)} id="profile-image" type="file" className="hidden" />
                                 </label>
-                                {switchTab == "HR Manager" && <label htmlFor="company-logo" className="flex flex-col items-center w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
+
+
+                                {switchTab == "HR Manager" && <label htmlFor="company-logo" className="flex flex-col items-center w-full max-w-lg p-2 mx-auto mt-2 text-center bg-white border-2 border-dashed  cursor-pointer dark:bg-gray-900 dark:border-gray-700 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-8 h-8 text-gray-500 dark:text-gray-400">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
                                     </svg>
@@ -254,10 +256,10 @@ const Registration = () => {
                             <div className="form-control mt-6">
                                 <button className='w-full'>
 
-                                    <Button style={"w-full"} btnName={"Register"} spinner={spinner} />
+                                    <Button style={"w-full bg-blue-600 hover:bg-blue-500"} btnName={"Register"} spinner={spinner} />
                                 </button>
                             </div>
-                            <p>Already Have an Account? <Link to="/login" className='underline text-white'>Login</Link></p>
+                            <p className='text-center'>Already Have an Account? <Link to="/login" className='underline text-blue-600 '>Login</Link></p>
                         </form>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ const AllCompany = () => {
             <SectionTitle subTitle={"Best Companies"} heading={"Find Your HR"} />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
                 {
-                    data.map(asset =>
+                    data?.slice(0,6).map(asset =>
                         <div key={asset._id} className="w-full max-w-md px-8 py-4 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 border">
                             <div className="flex justify-center mt-0 md:justify-end">
                                 <img className="object-cover w-20 h-20 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src={asset?.companyProfileImage} />

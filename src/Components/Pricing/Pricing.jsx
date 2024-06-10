@@ -39,12 +39,12 @@ const Pricing = () => {
                                 </li>
                             </ul>
                             <Link to="/payment-confirm" className='flex justify-center'>
-                                <Button btnName={"Get Start"} />
+                                <Button btnName={"Get Start"}/>
                             </Link>
                         </div>
                     </div>
                     <div className="flex w-full mb-8 sm:px-4 md:w-1/2 lg:w-1/3 lg:mb-0 lg:h-[550px]">
-                        <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 bg-violet-600 text-gray-50">
+                        <div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8  bg-blue-100">
                             <div className="space-y-2">
                                 <h4 className="text-2xl font-bold">Pro</h4>
                                 <span className="text-6xl font-bold">$15

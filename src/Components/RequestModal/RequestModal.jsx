@@ -60,7 +60,7 @@ const RequestModal = ({ jobId }) => {
                     isLoading ? <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span> :
 
                         <form onSubmit={handelRequestSubmit}>
-                            <h3 className="font-bold text-3xl text-center">Application Form</h3>
+                            <h3 className="font-semibold text-5xl text-center font-rancho text-pink-500">Application Form</h3>
 
                             <div className='flex flex-col md:flex-row gap-4 mt-8'>
                                 <label className="form-control w-full max-w-xs">
@@ -130,7 +130,7 @@ const RequestModal = ({ jobId }) => {
 
                                 </label>
                                 <button type='submit' className='w-1/2'>
-                                    <Button btnName={"Apply"} style={"w-full"} />
+                                    <Button btnName={"Apply"} style={"w-full bg-pink-400"} />
                                 </button>
 
                             </div>

@@ -23,6 +23,7 @@ import TotalEmployeeList from '../Dashboard/Hr-Manager/TotalEmployeeList/TotalEm
 import AddAnEmployee from '../Dashboard/Hr-Manager/AddAnEmployee/AddAnEmployee';
 import AllRequestAssets from '../Dashboard/Hr-Manager/AllRequestAssets/AllRequestAssets';
 import UpdateProfile from '../Components/Update/UpdateProfile/UpdateProfile';
+import MyTeamMember from '../Dashboard/Employee/MyTeamMember/MyTeamMember';
 
 const Routes = createBrowserRouter([
     {
@@ -111,6 +112,10 @@ const Routes = createBrowserRouter([
             {
                 path: "employee-asset-request",
                 element: <CheckEmployeeRoutes><EmployeeAssetRequest /></CheckEmployeeRoutes>
+            },
+            {
+                path:"my-team-member",
+                element:<CheckEmployeeRoutes><MyTeamMember/></CheckEmployeeRoutes>
             }
         ]
     }
