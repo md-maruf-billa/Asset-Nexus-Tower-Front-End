@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
 import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -7,20 +7,33 @@ import noData from '../../../assets/Animation/NoDataFound.json';
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
 import Swal from 'sweetalert2';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 
 const AllRequestAssets = () => {
     const { currentUser } = useCurrentUser();
     const axiosSecure = useAxiosSecure();
+    const [requestLength, setRequestLength] = useState([]);
+    const dataParePage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const pages = [];
+    const totalPage = Math.ceil(requestLength.length / dataParePage);
+    for (let i = 1; i < totalPage + 1; i++) {
+        pages.push(i)
+    }
     const { data, isLoading, refetch } = useQuery({
         queryKye: ["load all request list"],
         queryFn: async () => {
-            const result = await axiosSecure(`/load-all-requested/${currentUser.email}`);
+            const result = await axiosSecure(`/load-all-requested/${currentUser.email}?page=${currentPage - 1}&size=${dataParePage}`);
             return result.data;
         }
     })
-
-
+    useEffect(()=>{refetch()},[currentPage])
+    // LOAD REQUEST LENGTH
+    useEffect(() => {
+        axiosSecure(`/load-all-requested-length/${currentUser.email}`)
+            .then(res => setRequestLength(res.data))
+    }, [])
     // update current status
     const updateStatus = (id, status) => {
         const time = new Date().toLocaleDateString();
@@ -40,7 +53,7 @@ const AllRequestAssets = () => {
             })
     }
 
-    if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>;
+    if (isLoading) return refetch;
     if (data.length === 0) return <div className='flex justify-center items-center h-[90vh]'>
         <Lottie className='w-1/2' animationData={noData}></Lottie>
     </div>
@@ -48,11 +61,12 @@ const AllRequestAssets = () => {
 
     return (
         <div>
-            <section className="container px-4 mx-auto">
+            <PageTitle title={"all-requests"} />
+            <section className="container px-4 mx-auto mt-5">
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">Total Request</h2>
 
-                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{data?.length}</span>
+                    <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{requestLength?.length}</span>
                 </div>
 
                 <div className="flex flex-col mt-6">
@@ -156,36 +170,27 @@ const AllRequestAssets = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-6">
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" stroke:inejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-                        </svg>
+                <div className="flex items-center justify-center mt-6">
 
-                        <span>
-                            previous
-                        </span>
-                    </a>
 
-                    <div className="items-center hidden lg:flex gap-x-3">
-                        <a href="#" className="px-2 py-1 text-sm text-blue-500 rounded-md dark:bg-gray-800 bg-blue-100/60">1</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">2</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">3</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">...</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">12</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">13</a>
-                        <a href="#" className="px-2 py-1 text-sm text-gray-500 rounded-md dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">14</a>
+                    <div className="join">
+                        {
+                            pages.map(page =>
+
+                                <input
+                                    onChange={(e) => {setCurrentPage(e.target.value)}}
+                                    className="join-item btn btn-square"
+                                    type="radio"
+                                    name="options"
+                                    value={page}
+                                    aria-label={page}
+                                    checked={currentPage == page} />
+
+                            )
+                        }
                     </div>
 
-                    <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
-                        <span>
-                            Next
-                        </span>
 
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
-                            <path strokeLinecap="round" stroke:inejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                        </svg>
-                    </a>
                 </div>
             </section>
         </div>

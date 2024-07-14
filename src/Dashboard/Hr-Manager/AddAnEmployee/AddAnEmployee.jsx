@@ -4,6 +4,7 @@ import userAxiosGlobal from '../../../Utils/Hooks/userAxiosGlobal';
 import Button from '../../../Shared/Button/Button';
 import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const AddAnEmployee = () => {
     const axiosGlobal = userAxiosGlobal();
@@ -66,6 +67,7 @@ const AddAnEmployee = () => {
 
     return (
         <div className='flex justify-center items-center h-[80vh]'>
+            <PageTitle title={"add-employee"}/>
             <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
                 <h2 class="text-2xl text-center font-semibold text-gray-700 capitalize dark:text-white">Add Employee Manually</h2>
 

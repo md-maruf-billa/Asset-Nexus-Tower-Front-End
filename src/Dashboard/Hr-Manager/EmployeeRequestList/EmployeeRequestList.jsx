@@ -8,6 +8,7 @@ import { BsDot } from "react-icons/bs";
 import Swal from 'sweetalert2';
 import useUserInformation from '../../../Utils/Hooks/useUserInformation';
 import { Link } from 'react-router-dom';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 const EmployeeRequestList = () => {
     const { currentUser } = useCurrentUser();
     const userInformation = useUserInformation();
@@ -69,6 +70,7 @@ const EmployeeRequestList = () => {
 
     return (
         <div>
+            <PageTitle title={"employee-request"}/>
             <div className='flex justify-between'>
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">Total Requests</h2>

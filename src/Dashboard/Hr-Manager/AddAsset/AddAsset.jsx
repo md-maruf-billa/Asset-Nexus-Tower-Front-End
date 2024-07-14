@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../Utils/Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const AddAsset = () => {
     const { register, handleSubmit,reset } = useForm()
@@ -55,6 +56,7 @@ const AddAsset = () => {
 
     return (
         <div className='flex items-center justify-center w-full h-full'>
+            <PageTitle title={"add assets"}/>
             <section class=" p-6 mx-auto bg-white rounded-md shadow-md ">
                 <h2 class="text-4xl text-center font-semibold text-gray-700 capitalize">Add Your Assets</h2>
 

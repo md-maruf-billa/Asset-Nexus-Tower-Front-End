@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import useUserInformation from '../../../Utils/Hooks/useUserInformation';
 import Swal from 'sweetalert2';
 import { FaUsers } from 'react-icons/fa6';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 const TotalEmployeeList = () => {
     const axiosSecure = useAxiosSecure();
@@ -54,6 +55,7 @@ const TotalEmployeeList = () => {
     if (isLoading) return <span className="loading absolute top-1/2 left-1/2 loading-bars loading-lg"></span>
     return (
         <div className='mt-4'>
+            <PageTitle title={"my-employees"}/>
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>
                     <h3 className='text-sm md:text-2xl font-semibold'>Total Employee Limit : </h3>

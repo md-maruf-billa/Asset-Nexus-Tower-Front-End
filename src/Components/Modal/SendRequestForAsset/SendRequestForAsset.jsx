@@ -170,7 +170,7 @@ const SendRequestForAsset = ({ assetId ,modalOpen,setModalOpen}) => {
 
                             </div>
 
-                            <div className="mt-6 sm:flex sm:items-center justify-between  sm:-mx-2">
+                            <div className="mt-6 flex items-center justify-between  sm:-mx-2">
                             <button 
                             className='btn btn-error text-white'
                             type="button"

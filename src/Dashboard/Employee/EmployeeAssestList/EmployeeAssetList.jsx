@@ -7,11 +7,16 @@ import { useQuery } from '@tanstack/react-query';
 import Lottie from 'lottie-react';
 import noData from '../../../assets/Animation/NoDataFound.json'
 import PageTitle from './../../../Shared/PageTitle/PageTitle';
+import Swal from 'sweetalert2';
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import PdfDocument from '../../../Components/PdfDocument/PdfDocument';
+
+
 const EmployeeAssetList = () => {
     const axiosSecure = useAxiosSecure();
     const { currentUser } = useCurrentUser();
 
-    const { data, isLoading } = useQuery({
+    const { data, isLoading, refetch } = useQuery({
         queryKey: ["load all request"],
         queryFn: async () => {
             const result = await axiosSecure(`/employee-asset-request/${currentUser.email}`);
@@ -19,19 +24,45 @@ const EmployeeAssetList = () => {
         }
     })
 
+    const cancelRequest = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Cancel it!"
+        }).then((result) => {
 
-    if(data?.length === 0) return <div className='flex justify-center items-center'><Lottie className='w-1/2 ' animationData={noData}></Lottie>
-</div>
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/delete-asset-request?email=${currentUser.email}&id=${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0)
+                            Swal.fire({
+                                title: "Canceled!",
+                                text: "Your request has been canceled.",
+                                icon: "success"
+                            });
+                        refetch()
+                    })
+            }
+        });
+
+    }
+
+
+    if (data?.length === 0) return <div className='flex justify-center items-center'><Lottie className='w-1/2 ' animationData={noData}></Lottie>
+    </div>
     return (
         <div>
             <section className="container px-4 mx-auto mt-6">
-                <PageTitle title={"Requested Assets"}/>
+                <PageTitle title={"Requested Assets"} />
                 <div className="flex items-center gap-x-3">
                     <h2 className="text-lg font-medium text-gray-800 dark:text-white">Total Requests</h2>
 
                     <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">{data?.length} </span>
                 </div>
-
                 <div className="flex flex-col mt-6">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -90,7 +121,7 @@ const EmployeeAssetList = () => {
                                                                         <img className="object-cover w-10 h-10 rounded-full" src={asset.assetImage} alt="" />
                                                                         <div>
                                                                             <h2 className="font-medium text-xl text-gray-800 dark:text-white ">{asset.productName}</h2>
-                                                                           
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -99,7 +130,7 @@ const EmployeeAssetList = () => {
                                                                 <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                                                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 
-                                                                    <h2 className={`text-sm font-normal  ${asset.status? "text-red-500":"text-emerald-500"}`}>{asset.status}</h2>
+                                                                    <h2 className={`text-sm font-normal  ${asset.status ? "text-red-500" : "text-emerald-500"}`}>{asset.status}</h2>
                                                                 </div>
                                                             </td>
                                                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">{asset.productType}</td>
@@ -108,13 +139,24 @@ const EmployeeAssetList = () => {
                                                             <td className='px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap'>{asset?.acceptedDate}</td>
                                                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                                                                 <div className="flex items-center gap-x-6">
-                                                                    <button disabled={asset.status === "Pending"} className="btn btn-sm bg-green-300 text-[#271f1f] hover:bg-green-500">
-                                                                        Print <PiPrinterFill />
-                                                                    </button>
+                                                                    <PDFDownloadLink document={<PdfDocument />} fileName="form">
+                                                                        {({ loading }) => (
+                                                                            <button disabled={loading}>
+                                                                                {loading ? 'Loading...' : <button disabled={asset.status === "Pending"} className="btn btn-sm bg-green-300 text-[#271f1f] hover:bg-green-500">
+                                                                                    Print <PiPrinterFill />
+                                                                                </button>}
+                                                                            </button>
+                                                                        )}
+                                                                    </PDFDownloadLink>
+
+
+
+
 
                                                                     <button
-                                                                    disabled={asset.status == "Accepted"}
-                                                                    className="btn btn-sm text-red-500 bg-red-200 hover:bg-red-300 hover:text-red-700">
+                                                                        onClick={() => cancelRequest(asset._id)}
+                                                                        disabled={asset.status == "Accepted"}
+                                                                        className="btn btn-sm text-red-500 bg-red-200 hover:bg-red-300 hover:text-red-700">
                                                                         Cancel
                                                                         <MdOutlineCancel />
                                                                     </button>
@@ -134,7 +176,7 @@ const EmployeeAssetList = () => {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-6">
+                {/* <div className="flex items-center justify-between mt-6">
                     <a href="#" className="flex items-center px-5 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 bg-white border rounded-md gap-x-2 hover:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 rtl:-scale-x-100">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
@@ -164,7 +206,7 @@ const EmployeeAssetList = () => {
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
                         </svg>
                     </a>
-                </div>
+                </div> */}
             </section>
         </div>
     );

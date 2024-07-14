@@ -24,6 +24,7 @@ import AddAnEmployee from '../Dashboard/Hr-Manager/AddAnEmployee/AddAnEmployee';
 import AllRequestAssets from '../Dashboard/Hr-Manager/AllRequestAssets/AllRequestAssets';
 import UpdateProfile from '../Components/Update/UpdateProfile/UpdateProfile';
 import MyTeamMember from '../Dashboard/Employee/MyTeamMember/MyTeamMember';
+import PdfDocument from '../Components/PdfDocument/PdfDocument';
 
 const Routes = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const Routes = createBrowserRouter([
             {
                 path: "/all-companies",
                 element: <AllCompanyJobs />
+            },
+            {
+                path:"/test",
+                element:<PdfDocument/>
             }
         ]
     },

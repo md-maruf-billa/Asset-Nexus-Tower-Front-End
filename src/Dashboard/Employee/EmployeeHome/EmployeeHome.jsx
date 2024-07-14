@@ -32,7 +32,7 @@ const EmployeeHome = () => {
                             </> :
 
                                 <>
-                                    <div className='px-3 flex flex-col justify-between'>
+                                    <div className='px-3 flex flex-col justify-between items-center min-h-[90vh]'>
                                         <div>
                                             <div className='flex items-center gap-2'>
                                                 <p className='text-4xl md:text-6xl font-rancho'>Welcome</p>

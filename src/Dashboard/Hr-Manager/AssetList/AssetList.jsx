@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import noDataFound from '../../../assets/Animation/NoDataFound.json'
 import AssetUpdateModal from '../../DashboardShared/AssetsBarChart/AssetUpdateModal/AssetUpdateModal';
 import useCurrentUser from '../../../Utils/Hooks/userCurrentUser';
+import PageTitle from '../../../Shared/PageTitle/PageTitle';
 
 
 const AssetList = () => {
@@ -15,22 +16,41 @@ const AssetList = () => {
     const axiosSecure = useAxiosSecure();
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [assetId, setAssetId] = useState("");
-    const [filterData, setFilterData] = useState("")
-    const [range, setRange] = useState(0);
-    console.log(range)
+    const [filterData, setFilterData] = useState("");
+    const [sortData, setSortData] = useState("");
+    const dataParePage = 10;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalDataLength, setTotalDataLength] = useState([]);
+    const totalPage = Math.ceil(totalDataLength.length / dataParePage);
+    const pages = [];
+    for (let i = 1; i < totalPage + 1; i++) {
+        pages.push(i)
+    }
+
+
     // LOAD ALL ASSET
     const { data: allAsset, isLoading, refetch } = useQuery({
         queryKey: ["load all asset"],
         queryFn: async () => {
-            const res = await axiosSecure(`/all-asset/${currentUser?.email}?stock=${filterData}`);
+            const res = await axiosSecure(`/all-asset/${currentUser?.email}?stock=${filterData}&sort=${sortData}&page=${currentPage-1}&size=${dataParePage}`);
             return res.data;
         }
 
 
     })
+
+    // LOAD DATA LENGTH FOR PAGINATION
+    useEffect(() => {
+        axiosSecure(`/all-asset-length/${currentUser?.email}`)
+            .then(res => {
+                setTotalDataLength(res.data)
+            })
+    }, [])
     useEffect(() => {
         refetch()
-    }, [filterData])
+    }, [filterData, sortData,currentPage])
+    if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
+
 
 
     // DELETE ASSET
@@ -69,18 +89,18 @@ const AssetList = () => {
 
 
 
-    if (isLoading) return <span className="loading loading-bars loading-lg absolute top-1/2 left-1/2"></span>
     return (
         <div className='w-full py-10 px-2'>
+            <PageTitle title={"assets"} />
             <h3 className='text-5xl font-rancho mb-8 text-center text-[#cd5bcd]'>Your All Assets List :</h3>
             <div className='flex justify-between gap-3 mb-10'>
-                
+
                 <label className="form-control ">
                     <div className="label">
                         <span className="label-text">Sort on Quantity</span>
                     </div>
                     <select
-                        // onChange={(e) => setFilterData(e.target.value)}
+                        onChange={(e) => setSortData(e.target.value)}
                         className="select select-bordered">
                         <option disabled selected>Select on</option>
                         <option>Low to High</option>
@@ -169,6 +189,26 @@ const AssetList = () => {
                 assetId={assetId}
                 refetch={refetch}
             />
+
+
+            <div className='flex justify-center items-center mt-10'>
+                <div className="join">
+                    {
+                        pages.map(page =>
+
+                            <input 
+                            onChange={(e)=>setCurrentPage(e.target.value)}
+                            className="join-item btn btn-square" 
+                            type="radio" 
+                            name="options" 
+                            value={page} 
+                            aria-label={page} 
+                            checked={currentPage == page} />
+
+                        )
+                    }
+                </div>
+            </div>
         </div>
     );
 };
